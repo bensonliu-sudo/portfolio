@@ -1,6 +1,6 @@
 // Contact form endpoint: validates the message and forwards it to Web3Forms, which emails the site owner.
 // The Web3Forms access key lives only in the Vercel environment, never in the page.
-const KEY_NAMES = ['WEB3FORMS_ACCESS_KEY', 'WEB3FORMS_KEY', 'WEB3FORM_ACCESS_KEY', 'WEB3FORM_KEY', 'WEB3_FORMS_KEY', 'ACCESS_KEY', 'FORM_ACCESS_KEY'];
+const KEY_NAMES = ['WEB3_FORM', 'WEB3FORMS_ACCESS_KEY', 'WEB3FORMS_KEY', 'WEB3FORM_ACCESS_KEY', 'WEB3FORM_KEY', 'WEB3_FORMS_KEY', 'ACCESS_KEY', 'FORM_ACCESS_KEY'];
 const ALLOWED_ORIGIN = /^https:\/\/(bingchengliu\.com|www\.bingchengliu\.com|portfolio[a-z0-9-]*\.vercel\.app)$/;
 
 module.exports = async (req, res) => {
