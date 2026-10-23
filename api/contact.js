@@ -11,7 +11,11 @@ module.exports = async (req, res) => {
   const keyName = KEY_NAMES.find((k) => process.env[k]);
   if (!keyName) return res.status(500).json({ success: false, message: 'Form is not configured' });
 
-  const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+  let b = req.body;
+  if (typeof b === 'string') {
+    try { b = JSON.parse(b); } catch { return res.status(400).json({ success: false, message: 'Invalid request body' }); }
+  }
+  if (!b || typeof b !== 'object' || Array.isArray(b)) return res.status(400).json({ success: false, message: 'Invalid request body' });
   if (b.botcheck) return res.status(200).json({ success: true });   // honeypot: pretend success, send nothing
   const name = String(b.name || '').trim().slice(0, 100);
   const email = String(b.email || '').trim().slice(0, 200);

@@ -52,7 +52,6 @@ img,video{display:block;max-width:100%}
 .roles li{font-size:13px;letter-spacing:.02em;color:var(--ink);border:1px solid var(--line);background:rgba(140,194,255,.06);padding:7px 14px;border-radius:999px}
 .lede{max-width:640px;font-size:clamp(17px,1.6vw,21px);color:var(--muted);opacity:0;animation:fade 1.2s .9s forwards}
 @keyframes fade{to{opacity:1}}
-@media (max-width:640px){.scroll-cue{display:none}}
 .cta{display:flex;gap:14px;margin-top:40px;opacity:0;animation:fade 1.2s 1.15s forwards;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.01em;transition:transform .25s,background .25s,color .25s,border-color .25s}
 .btn.solid{background:var(--ink);color:var(--bg)}.btn.solid:hover{background:var(--accent);transform:translateY(-2px)}
@@ -259,3 +258,5 @@ a.frame{display:block}
 .form-status.ok{color:#7fe3a8}.form-status.err{color:#ff9b8a}
 @media(max-width:980px){.contact{grid-template-columns:1fr;gap:44px}}
 @media(max-width:640px){.field-row{grid-template-columns:1fr}.contact-form{padding:24px}#contact{padding:90px 0 80px}}
+/* keep last: hide the scroll hint on phones, after the base .scroll-cue rule */
+@media(max-width:640px){.scroll-cue{display:none}}
