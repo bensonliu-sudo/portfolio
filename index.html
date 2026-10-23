@@ -1,24 +1,378 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bingcheng Liu — Software, AI & Data</title>
-<meta name="description" content="Selected software, AI and data projects by Bingcheng Liu. Explore the code and the thinking behind each project.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bingcheng Liu — Full-stack, AI Agents & Finance</title>
+<meta name="description" content="Bingcheng Liu takes ideas to production: full-stack products, AI agent systems, data platforms and quantitative tools. Selected work, with real product walkthroughs.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#f6f5f0">
+<meta name="theme-color" content="#050b1a">
+<meta property="og:title" content="Bingcheng Liu — Software, AI & Data">
+<meta property="og:description" content="Full-stack, AI agent and data projects taken to production, with real product walkthroughs.">
+<meta property="og:image" content="/assets/multifactor/poster.jpg">
 <style>
-:root{--paper:#f6f5f0;--ink:#252922;--muted:#62675c;--line:#dcded4;--accent:#b8492e}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid var(--accent);outline-offset:6px}.skip{position:absolute;top:-100px;left:20px;background:var(--ink);color:white;padding:8px}.skip:focus{top:8px}header,main,footer{width:min(1120px,calc(100% - 64px));margin:auto}header{display:flex;justify-content:space-between;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}.brand{font-weight:650;letter-spacing:-.04em;font-size:22px}.brand span{color:var(--accent)}nav{display:flex;gap:28px;font-size:14px}nav a:hover,.text-link:hover{color:var(--accent)}.hero{padding:100px 0 90px;max-width:920px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:600}.hero h1{font-size:clamp(56px,8vw,106px);font-weight:500;letter-spacing:-.065em;line-height:1.06;margin:25px 0}.hero h1 em{font-style:normal;color:var(--accent)}.intro{font-size:clamp(18px,2.4vw,24px);max-width:670px;color:var(--muted);line-height:1.55}.hero .text-link{display:inline-block;margin-top:20px;border-bottom:1px solid var(--ink);padding-bottom:4px}.section-heading{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:24px;margin-bottom:30px}.section-heading h2{font-size:26px;letter-spacing:-.03em;font-weight:500;margin:0}.section-heading span{color:var(--muted);font-size:13px}.project{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fffef9}.diagram{background:#e6e9dd;padding:45px;display:flex;flex-direction:column;justify-content:center;gap:20px;min-height:370px}.diagram-title{font-size:12px;letter-spacing:.14em;color:#4b5741;text-transform:uppercase}.flow{display:flex;align-items:center;gap:8px}.step{padding:12px 10px;background:var(--paper);border:1px solid #cbd2c0;border-radius:7px;font-family:ui-monospace,monospace;font-size:12px;flex:1;text-align:center}.arrow{font-size:18px;color:#69755e}.bars{display:grid;gap:12px;margin-top:5px}.bar-row{display:flex;align-items:center;gap:12px;font-size:12px;font-family:ui-monospace,monospace;color:#58624e}.bar{height:12px;background:#7c8a6c;border-radius:3px}.bar-row:nth-child(2) .bar{background:#99a589}.bar-row:nth-child(3) .bar{background:#b6bfa9}.diagram-note{font-size:11px;color:#58624e;margin:0}.project-copy{padding:44px}.number{font-size:12px;color:var(--accent);letter-spacing:.13em}.project h3{font-size:32px;line-height:1.2;font-weight:500;letter-spacing:-.04em;margin:18px 0}.project p{color:var(--muted);font-size:15px}.tags{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}.tag{font-size:11px;padding:4px 9px;border:1px solid var(--line);border-radius:20px}.button{display:inline-block;background:var(--ink);color:var(--paper);border-radius:7px;padding:12px 18px;font-size:14px}.button:hover{background:var(--accent)}.about{margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:48px;border-top:1px solid var(--line);padding-top:30px}.about h2{font-size:30px;font-weight:500;letter-spacing:-.035em;margin:0}.about p{margin:0 0 16px;color:var(--muted)}.text-link{font-size:14px}footer{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:25px 0 35px;font-size:12px;color:var(--muted)}@media(max-width:720px){header,main,footer{width:calc(100% - 40px)}header{padding:22px 0}nav{gap:18px}.hero{padding:65px 0}.hero h1{font-size:60px}.project,.about{grid-template-columns:1fr}.diagram{min-height:280px;padding:30px}.project-copy{padding:30px}.project h3{font-size:29px}.about{gap:24px;margin:55px 0}.section-heading span{display:none}footer{gap:20px;flex-wrap:wrap}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:root{
+  --bg:#050b1a;--bg2:#08132b;--panel:rgba(16,32,68,.55);--ink:#eef3ff;--muted:#9aabcc;--faint:#5f7196;
+  --line:rgba(150,185,255,.14);--accent:#8cc2ff;--accent-2:#5b8cff;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --wrap:min(1200px,calc(100% - 64px));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+img,video{display:block;max-width:100%}
+.skip{position:absolute;top:-100px;left:20px;background:var(--ink);color:var(--bg);padding:8px 12px;z-index:100}.skip:focus{top:10px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(5,11,26,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{width:var(--wrap);margin:auto;display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{font-family:var(--serif);font-size:26px;letter-spacing:-.02em}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:34px;font-size:14px;color:var(--muted)}
+.nav-links a{position:relative;transition:color .25s}.nav-links a:hover{color:var(--ink)}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  background:radial-gradient(1200px 700px at 78% 30%,rgba(60,110,230,.22),transparent 60%),radial-gradient(900px 600px at 10% 90%,rgba(40,90,200,.16),transparent 60%),var(--bg)}
+#flow{position:absolute;inset:0;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:220px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+.hero-in{position:relative;z-index:2;width:var(--wrap);margin:auto;padding:140px 0 120px}
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:38px;height:1px;background:var(--accent)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(58px,9.4vw,138px);line-height:.98;letter-spacing:-.035em;margin:34px 0 34px}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.42em);animation:rise 1.1s cubic-bezier(.2,.75,.2,1) forwards}
+.hero h1 .accent{color:var(--accent);font-style:italic}
+@keyframes rise{to{opacity:1;transform:none}}
+.roles{list-style:none;padding:0;margin:-6px 0 30px;display:flex;flex-wrap:wrap;gap:10px;opacity:0;animation:fade 1.2s .7s forwards}
+.roles li{font-size:13px;letter-spacing:.02em;color:var(--ink);border:1px solid var(--line);background:rgba(140,194,255,.06);padding:7px 14px;border-radius:999px}
+.lede{max-width:640px;font-size:clamp(17px,1.6vw,21px);color:var(--muted);opacity:0;animation:fade 1.2s .9s forwards}
+@keyframes fade{to{opacity:1}}
+@media (max-width:640px){.scroll-cue{display:none}}
+.cta{display:flex;gap:14px;margin-top:40px;opacity:0;animation:fade 1.2s 1.15s forwards;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.01em;transition:transform .25s,background .25s,color .25s,border-color .25s}
+.btn.solid{background:var(--ink);color:var(--bg)}.btn.solid:hover{background:var(--accent);transform:translateY(-2px)}
+.btn.ghost{border:1px solid rgba(238,243,255,.3)}a.btn.ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.btn.muted{border:1px dashed rgba(238,243,255,.22);color:var(--muted);cursor:default}
+.scroll-cue{position:absolute;z-index:2;left:50%;bottom:34px;transform:translateX(-50%);font-size:11px;letter-spacing:.24em;color:var(--faint);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px}
+.scroll-cue i{width:1px;height:48px;background:linear-gradient(var(--accent),transparent);animation:cue 2.2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- marquee ---------- */
+.marquee{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:22px 0;background:var(--bg2)}
+.marquee-track{display:inline-flex;gap:56px;animation:scroll 42s linear infinite;font-family:var(--serif);font-size:24px;color:var(--muted)}
+.marquee-track span::after{content:"✦";margin-left:56px;color:var(--accent-2);font-size:14px;vertical-align:4px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{position:relative}
+.wrap{width:var(--wrap);margin:auto}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:56px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.2vw,72px);line-height:1.02;letter-spacing:-.03em;margin:18px 0 0}
+.sec-head h2 em{color:var(--accent)}
+.sec-head p{max-width:420px;color:var(--muted);margin:0}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.75,.2,1),transform 1s cubic-bezier(.2,.75,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* featured */
+#work{padding:150px 0 110px}
+.feature{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:64px;align-items:center}
+.frame{border-radius:14px;overflow:hidden;background:#0b1631;border:1px solid var(--line);box-shadow:0 40px 120px -30px rgba(40,100,255,.45),0 0 0 1px rgba(255,255,255,.03) inset;transform:perspective(1600px) rotateY(-6deg) rotateX(2deg);transition:transform .9s cubic-bezier(.2,.75,.2,1),opacity 1s,translate 1s}
+.frame.rv{opacity:0;translate:0 34px}.frame.rv.in{opacity:1;translate:0 0}
+.frame:hover{transform:perspective(1600px) rotateY(0) rotateX(0)}
+.frame-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#0e1b3a;border-bottom:1px solid var(--line)}
+.frame-bar i{width:10px;height:10px;border-radius:50%}.frame-bar i:nth-child(1){background:#ff5f57}.frame-bar i:nth-child(2){background:#febc2e}.frame-bar i:nth-child(3){background:#28c840}
+.frame-bar span{margin-left:12px;font:12px var(--mono);color:var(--faint)}
+.frame video{width:100%;aspect-ratio:16/10;object-fit:cover;background:#0b1631}
+.proj-num{font:12px var(--mono);color:var(--accent);letter-spacing:.14em}
+.proj h3{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4vw,56px);line-height:1.04;letter-spacing:-.025em;margin:16px 0 22px}
+.proj p{color:var(--muted);font-size:16px;margin:0 0 16px}
+.feats{list-style:none;padding:0;margin:26px 0;display:grid;gap:14px}
+.feats li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15px;color:#c9d5ee}
+.feats li::before{content:"";width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.feats b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 30px}
+.tag{font:12px var(--mono);padding:6px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.proj .scope{font-size:13px;color:var(--faint);border-left:2px solid var(--accent-2);padding-left:14px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:90px;border-top:1px solid var(--line)}
+.stat{padding:34px 26px 10px 0}
+.stat+.stat{padding-left:26px;border-left:1px solid var(--line)}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.6vw,64px);line-height:1;letter-spacing:-.03em}
+.stat b small{font-size:.5em;color:var(--accent);margin-left:4px}
+.stat > span{display:block;margin-top:14px;color:var(--muted);font-size:14px;max-width:230px}
+
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:70px 0 0;padding:0}
+.shot{position:relative;margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0b1631}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:top left;transition:transform 1.2s cubic-bezier(.2,.75,.2,1),filter .6s;filter:saturate(.9) brightness(.92)}
+.shot:hover img{transform:scale(1.06);filter:none}
+.shot figcaption{position:absolute;inset:auto 0 0 0;padding:28px 14px 12px;font-size:13px;background:linear-gradient(transparent,rgba(5,11,26,.92))}
+
+/* approach */
+#approach{padding:120px 0;background:linear-gradient(var(--bg),var(--bg2) 40%,var(--bg))}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{position:relative;padding:36px 30px 34px;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;transition:border-color .4s,transform .4s,opacity 1s}
+.step:hover{border-color:rgba(140,194,255,.45);transform:translateY(-4px)}
+.step::before{content:"";position:absolute;inset:-1px;background:radial-gradient(420px 200px at var(--mx,50%) -20%,rgba(91,140,255,.22),transparent 70%);opacity:0;transition:opacity .4s;pointer-events:none}
+.step:hover::before{opacity:1}
+.step .n{font:12px var(--mono);color:var(--accent);letter-spacing:.14em}
+.step h3{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:-.02em;margin:18px 0 12px}
+.step p{color:var(--muted);font-size:15px;margin:0}
+
+/* more work */
+#more{padding:120px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:230px;padding:28px;border:1px solid var(--line);border-radius:14px;background:rgba(12,24,52,.5);transition:border-color .35s,transform .35s,background .35s,opacity 1s}
+.card:hover{border-color:rgba(140,194,255,.45);transform:translateY(-4px);background:rgba(16,32,68,.75)}
+.card h3{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.2;letter-spacing:-.01em;margin:0 0 12px}
+.card p{color:var(--muted);font-size:14px;margin:0}
+.card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:22px;font:12px var(--mono);color:var(--faint)}
+.card .meta i{font-style:normal;color:var(--accent);transition:transform .3s}.card:hover .meta i{transform:translate(3px,-3px)}
+
+/* about */
+#about{padding:110px 0 140px}
+.about{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;align-items:start}
+.about h2{font-family:var(--serif);font-weight:400;font-size:clamp(42px,5vw,70px);letter-spacing:-.03em;line-height:1.02;margin:18px 0 0}
+.about p{color:var(--muted);font-size:17px;margin:0 0 18px}
+.about .btn{margin-top:14px}
+footer{border-top:1px solid var(--line)}
+.foot{width:var(--wrap);margin:auto;display:flex;justify-content:space-between;padding:30px 0 40px;font-size:13px;color:var(--faint);gap:20px;flex-wrap:wrap}
+
+@media(max-width:980px){
+  .feature,.about{grid-template-columns:1fr;gap:44px}
+  .frame,.frame:hover{transform:none}
+  .stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){padding-left:0;border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .steps,.grid{grid-template-columns:1fr 1fr}
+  .sec-head{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  :root{--wrap:calc(100% - 32px)}
+  .nav-links{gap:18px;font-size:13px}.nav-links .hide-s{display:none}
+  .hero-in{padding:120px 0 110px}
+  .steps,.grid,.gallery{grid-template-columns:1fr}
+  .stat{padding:26px 12px 6px 0}.stat+.stat{padding-left:12px}
+  #work{padding:110px 0 80px}#approach,#more{padding:90px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero h1 .w,.roles,.lede,.cta{animation:none;opacity:1;transform:none}
+  .rv,.frame.rv{opacity:1;transform:none;translate:none;transition:none}
+  .marquee-track,.scroll-cue i{animation:none}
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header><a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="https://github.com/bensonliu-sudo">GitHub ↗</a></nav></header>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#work">Work</a>
+      <a href="#approach" class="hide-s">Approach</a>
+      <a href="#more">Projects</a>
+      <a href="#about" class="hide-s">About</a>
+      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
 <main id="main">
-<section class="hero" aria-labelledby="intro-title"><div class="eyebrow">Bingcheng Liu · 刘冰骋</div><h1 id="intro-title">Ideas into<br><em>working software.</em></h1><p class="intro">Exploring software, AI and data through practical projects. A place for the tools I build and the thinking behind them.</p><a class="text-link" href="#work">Explore selected work ↓</a></section>
-<section id="work" aria-labelledby="work-title"><div class="section-heading"><h2 id="work-title">Selected work</h2><span>01 / Software & data</span></div>
-<article class="project"><div class="diagram" role="img" aria-label="Conceptual diagram: configured factors are transformed into scores and a ranked stock pool. Illustrative bars, not real results."><div class="diagram-title">From factors to a ranked pool</div><div class="flow"><span class="step">Factors</span><span class="arrow">→</span><span class="step">Scores</span><span class="arrow">→</span><span class="step">Ranking</span></div><div class="bars"><div class="bar-row">01 <span class="bar" style="width:85%"></span></div><div class="bar-row">02 <span class="bar" style="width:65%"></span></div><div class="bar-row">03 <span class="bar" style="width:44%"></span></div></div><p class="diagram-note">Conceptual illustration · not market data</p></div>
-<div class="project-copy"><span class="number">PROJECT / 001</span><h3>Multi-factor<br>stock scoring</h3><p>A deterministic scoring tool that turns configured factors, directions and weights into reproducible scores, rankings and an auditable stock pool.</p><p>Includes a weight sandbox, factor-level explanations and a persistent run history. Factor research and backtesting are outside its scope; sample data is synthetic.</p><div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">NumPy</span><span class="tag">SQLite</span></div><a class="button" href="https://github.com/bensonliu-sudo/multifactor-stock-scoring">Explore the code ↗</a></div></article></section>
-<section class="about" id="about" aria-labelledby="about-title"><div><div class="eyebrow">Behind the work</div><h2 id="about-title">Bingcheng Liu</h2></div><div><p>This portfolio brings together my projects in software, AI and data, with an emphasis on how they work and what they can demonstrate.</p><p>Browse the source code for implementation details and project documentation.</p><a class="text-link" href="https://github.com/bensonliu-sudo">Find me on GitHub ↗</a></div></section>
+  <section class="hero" aria-labelledby="hero-title">
+    <canvas id="flow" aria-hidden="true"></canvas>
+    <div class="hero-in">
+      <div class="eyebrow">Bingcheng Liu · 刘冰骋</div>
+      <h1 id="hero-title"><span class="w" style="animation-delay:.05s">From</span> <span class="w" style="animation-delay:.17s">idea</span><br><span class="w accent" style="animation-delay:.32s">to</span> <span class="w accent" style="animation-delay:.44s">production.</span></h1>
+      <ul class="roles" aria-label="Focus areas"><li>Full-stack engineering</li><li>AI agent systems</li><li>Forward-deployed engineering</li><li>Data platforms</li><li>Quantitative finance</li></ul>
+      <p class="lede">I build production-grade systems end to end: full-stack products, multi-agent AI workflows, data platforms and research tools. I work close to the people who use them, and every system ships with tests, evidence and a clear statement of its limits.</p>
+      <div class="cta">
+        <a class="btn solid" href="#work">See featured work <span aria-hidden="true">↓</span></a>
+        <a class="btn ghost" href="https://github.com/bensonliu-sudo">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">Scroll<i></i></div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track">
+    <span>AI agent systems</span><span>Full-stack apps</span><span>LLM workflows</span><span>Data platforms</span><span>Quantitative research</span><span>Trading systems</span><span>Python · FastAPI · SQL</span><span>Machine learning & NLP</span><span>Computer vision</span><span>Smart contracts</span>
+    <span>AI agent systems</span><span>Full-stack apps</span><span>LLM workflows</span><span>Data platforms</span><span>Quantitative research</span><span>Trading systems</span><span>Python · FastAPI · SQL</span><span>Machine learning & NLP</span><span>Computer vision</span><span>Smart contracts</span>
+  </div></div>
+
+  <section id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="rv"><div class="eyebrow">Featured work</div><h2 id="work-title">From factors<br>to a <em>ranked pool.</em></h2></div>
+        <p class="rv d1">A full-stack tool for equity research teams that build stock candidate pools, recorded here running on its own synthetic demo data.</p>
+      </div>
+
+      <div class="feature">
+        <div class="frame rv">
+          <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>multi-factor-scoring · live walkthrough</span></div>
+          <video id="demo" src="/assets/multifactor/demo.mp4" poster="/assets/multifactor/poster.jpg" muted loop playsinline preload="metadata" aria-label="37-second screen recording of the multi-factor scoring tool"></video>
+        </div>
+        <div class="proj">
+          <div class="proj-num rv">PROJECT / 01</div>
+          <h3 class="rv d1">Multi-factor<br>stock scoring</h3>
+          <p class="rv d2">Researchers choose the factors, directions and weights. The tool turns those settings into exact, reproducible scores, rankings and an auditable stock pool, and explains every result factor by factor.</p>
+          <ul class="feats rv d3">
+            <li><span><b>Weight sandbox.</b> Drag a weight and the pool re-scores live, showing which stocks entered, left or moved.</span></li>
+            <li><span><b>Cutoff explanation.</b> How far each stock is from the rank-N threshold, and which factor drives the gap.</span></li>
+            <li><span><b>Audit trail.</b> Every run is stored with its config snapshot and data fingerprint, so any pool can be reproduced.</span></li>
+          </ul>
+          <div class="tags rv d3"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">NumPy</span><span class="tag">SQLite</span><span class="tag">Vanilla JS</span></div>
+          <p class="scope rv d4">A deterministic scoring layer: factor research, weight optimisation and backtesting are deliberately out of scope. Demo data is synthetic.</p>
+          <div class="actions rv d4">
+            <a class="btn solid" href="/assets/multifactor/demo.mp4">Watch full walkthrough <span aria-hidden="true">▶</span></a>
+            <span class="btn muted" title="The repository is private; source available on request">Source on request</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat rv"><b data-count="5000" data-sep="1">5,000</b><span>stocks × 10 factors scored per request in the stress test</span></div>
+        <div class="stat rv d1"><b><span data-count="0.6" data-dec="1" data-prefix="&lt; ">&lt; 0.6</span><small>s</small></b><span>slowest full HTTP request, scoring and persistence included</span></div>
+        <div class="stat rv d2"><b data-count="166">166</b><span>automated tests, including bit-exact regression against a reference</span></div>
+        <div class="stat rv d3"><b data-count="15">15</b><span>documented AI errors caught by independent review and fixed</span></div>
+      </div>
+
+      <div class="gallery">
+        <figure class="shot rv"><a href="/assets/multifactor/overview.jpg"><img src="/assets/multifactor/overview.jpg" alt="Stock pool overview" loading="lazy"></a><figcaption>Stock pool</figcaption></figure>
+        <figure class="shot rv d1"><a href="/assets/multifactor/sandbox.jpg"><img src="/assets/multifactor/sandbox.jpg" alt="Weight sandbox with rank changes" loading="lazy"></a><figcaption>Weight sandbox</figcaption></figure>
+        <figure class="shot rv d2"><a href="/assets/multifactor/industries.jpg"><img src="/assets/multifactor/industries.jpg" alt="Industry breakdown" loading="lazy"></a><figcaption>Industry breakdown</figcaption></figure>
+        <figure class="shot rv d3"><a href="/assets/multifactor/history.jpg"><img src="/assets/multifactor/history.jpg" alt="Run history" loading="lazy"></a><figcaption>Run history</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="rv"><div class="eyebrow">Approach</div><h2 id="approach-title">Built with AI.<br><em>Verified</em> like production.</h2></div>
+        <p class="rv d1">AI writes much of the code. What makes the result trustworthy is the process around it.</p>
+      </div>
+      <div class="steps">
+        <article class="step rv"><div class="n">01</div><h3>Specify, then verify the spec</h3><p>Every ambiguous rule is pinned down and checked against an independent reference, cell by cell, before features are built on it.</p></article>
+        <article class="step rv d1"><div class="n">02</div><h3>Build in gated packages</h3><p>Work ships in packages. Each is frozen, hashed and handed over; nothing moves forward until it passes review.</p></article>
+        <article class="step rv d2"><div class="n">03</div><h3>Independent adversarial review</h3><p>A second AI re-computes results, injects faults and replays real usage. Every finding is fixed and re-tested.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="more" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="rv"><div class="eyebrow">More projects</div><h2 id="more-title">Selected <em>write-ups.</em></h2></div>
+        <p class="rv d1">Public write-ups on GitHub; source code for most is available on request.</p>
+      </div>
+      <div class="grid">
+        <a class="card rv" href="https://github.com/bensonliu-sudo/financial-sentiment-transformers"><div><h3>Financial sentiment with Transformers</h3><p>TF-IDF, TextCNN, BiLSTM, BERT and FinBERT benchmarked on Financial PhraseBank: 36 runs, macro-F1 0.861; a leaked checkpoint found and excluded.</p></div><div class="meta"><span>NLP · Finance</span><i aria-hidden="true">↗</i></div></a>
+        <a class="card rv d1" href="https://github.com/bensonliu-sudo/ai-automated-trading-system"><div><h3>News-driven trading agent</h3><p>Multi-source news ingestion, relevance scoring, LLM trade thesis, async IBKR execution and Telegram alerts.</p></div><div class="meta"><span>Trading · LLM</span><i aria-hidden="true">↗</i></div></a>
+        <a class="card rv d2" href="https://github.com/bensonliu-sudo/news-recommender-mind"><div><h3>Interpretable news re-ranker</h3><p>Hybrid re-ranker on MIND-small with a leakage-audited evaluation protocol, nDCG@10 0.379.</p></div><div class="meta"><span>Recommender systems</span><i aria-hidden="true">↗</i></div></a>
+        <a class="card rv" href="https://github.com/bensonliu-sudo/construction-inspection-ledger"><div><h3>Tamper-evident inspection ledger</h3><p>Construction inspection workflow on Ethereum: 3 Solidity contracts, 42 Foundry tests, verified on Sepolia.</p></div><div class="meta"><span>Blockchain</span><i aria-hidden="true">↗</i></div></a>
+        <a class="card rv d1" href="https://github.com/bensonliu-sudo/pest-detection-yolov8"><div><h3>Two-stage pest detection</h3><p>YOLOv8 detect-then-classify pipeline for 12 agricultural pest classes, mAP@0.5 0.77.</p></div><div class="meta"><span>Computer vision</span><i aria-hidden="true">↗</i></div></a>
+        <a class="card rv d2" href="https://github.com/bensonliu-sudo/air-quality-forecasting"><div><h3>Air-quality forecasting</h3><p>Multi-horizon pollutant forecasting, reconstruction of 90%-missing series and residual 3-sigma anomaly detection.</p></div><div class="meta"><span>Time series</span><i aria-hidden="true">↗</i></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div class="rv"><div class="eyebrow">About</div><h2 id="about-title">Bingcheng<br>Liu</h2></div>
+      <div class="rv d1">
+        <p>I work across the stack, from data ingestion and models to APIs, interfaces and the agents that tie them together. Finance is where I go deepest, but the same approach carries to any domain where results have to hold up in production.</p>
+        <p>I care about results that can be reproduced and explained, which is why the projects here come with tests, evidence and a clear statement of their limits.</p>
+        <a class="btn ghost" href="https://github.com/bensonliu-sudo">Find me on GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><span>© 2026 Bingcheng Liu</span><span>Software · AI · Data</span></footer>
-</body></html>
+
+<footer><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // nav background after scrolling
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 30);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // reveal on scroll + counters (final values are already in the HTML for no-JS readers)
+  const fmt = (v, dec, sep) => sep ? Math.round(v).toLocaleString('en-US') : v.toFixed(dec);
+  const count = (el) => {
+    if (reduce) return;
+    const end = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), sep = !!el.dataset.sep, pre = el.dataset.prefix || '';
+    const t0 = performance.now(), dur = 1600;
+    const tick = (t) => { const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4);
+      el.textContent = pre + fmt(end * e, dec, sep); if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  };
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add('in');
+    en.target.querySelectorAll('[data-count]').forEach(count);
+    io.unobserve(en.target);
+  }), { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+
+  // demo video: autoplay only while on screen
+  const v = document.getElementById('demo');
+  if (v && !reduce) new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: 0.35 }).observe(v);
+
+  // spotlight following the pointer on approach cards
+  document.querySelectorAll('.step').forEach((el) => el.addEventListener('pointermove', (e) => {
+    const r = el.getBoundingClientRect(); el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+  }));
+
+  // hero: flowing data lines
+  const cv = document.getElementById('flow'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, lines = [], mouseY = 0.5, visible = true, t = 0, last = 0;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const build = () => {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = W < 700 ? 16 : 30;
+    lines = Array.from({ length: n }, (_, i) => ({
+      y: H * (0.16 + 0.8 * i / (n - 1)), amp: rnd(14, 46), f1: rnd(0.0016, 0.0042), f2: rnd(0.006, 0.013), f3: rnd(0.018, 0.03),
+      s1: rnd(0.12, 0.32), s2: rnd(0.25, 0.6), p: rnd(0, 1000), hot: i % 7 === 3, alpha: rnd(0.07, 0.2)
+    }));
+  };
+  const yAt = (L, x, tt) => L.y + L.amp * (Math.sin(x * L.f1 + tt * L.s1 + L.p) * 0.65 + Math.sin(x * L.f2 - tt * L.s2 + L.p * 1.7) * 0.28 + Math.sin(x * L.f3 + tt * 0.9 + L.p) * 0.07) + (mouseY - 0.5) * 30 * (L.y / H);
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(140,180,255,0.045)'; ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 80) { ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); ctx.stroke(); }
+    for (let y = 0; y < H; y += 80) { ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); ctx.stroke(); }
+    const step = W < 700 ? 10 : 7;
+    for (const L of lines) {
+      const a = L.hot ? 0.75 : L.alpha, g = ctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, 'rgba(91,140,255,0)'); g.addColorStop(0.45, `rgba(110,160,255,${a * 0.6})`); g.addColorStop(1, `rgba(150,200,255,${a})`);
+      ctx.strokeStyle = g; ctx.lineWidth = L.hot ? 1.6 : 1; ctx.beginPath();
+      for (let x = 0; x <= W + step; x += step) { const y = yAt(L, x, t); x ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      ctx.stroke();
+      if (L.hot) {
+        const x = W * 0.86, y = yAt(L, x, t);
+        ctx.fillStyle = 'rgba(160,205,255,0.95)'; ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(140,194,255,0.16)'; ctx.beginPath(); ctx.arc(x, y, 10 + 4 * Math.sin(t * 3), 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  };
+  const loop = (now) => { if (visible) { t += Math.min(0.05, (now - last) / 1000 || 0.016); draw(); } last = now; requestAnimationFrame(loop); };
+  build(); draw();
+  addEventListener('resize', () => { build(); draw(); });
+  addEventListener('pointermove', (e) => { mouseY += ((e.clientY / innerHeight) - mouseY) * 0.08; }, { passive: true });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(cv);
+  if (!reduce) requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
