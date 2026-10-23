@@ -5,7 +5,7 @@ from html import escape
 
 ROOT = Path(__file__).resolve().parents[1]
 
-NAV = """<header class="nav" id="nav">
+NAV = """<header class="nav theme-dark" id="nav">
   <div class="nav-in">
     <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
     <nav class="nav-links" aria-label="Main navigation">
@@ -43,6 +43,8 @@ def page(cs, nxt):
     stats2 = "".join(f'<div class="stat rv{" d%d" % i if i else ""}"><b>{v}</b><span>{t}</span></div>' for i, (v, t) in enumerate(cs.get("stats2", [])))
     note = f'<p class="stats-note rv">{cs["stats_note"]}</p>' if cs.get("stats_note") else ""
     note2 = f'<p class="stats-note rv">{cs["stats2_note"]}</p>' if cs.get("stats2_note") else ""
+    stats3 = "".join(f'<div class="stat rv{" d%d" % i if i else ""}"><b>{v}</b><span>{t}</span></div>' for i, (v, t) in enumerate(cs.get("stats3", [])))
+    note3 = f'<p class="stats-note rv">{cs["stats3_note"]}</p>' if cs.get("stats3_note") else ""
     lessons = "".join(f'<div class="lesson rv{" d1" if i % 2 else ""}"><b>{h}</b><p>{t}</p></div>' for i, (h, t) in enumerate(cs["lessons"]))
     limits = "".join(f"<li>{x}</li>" for x in cs["limits"])
     problem = "".join(f"<p>{x}</p>" for x in cs["problem"])
@@ -65,7 +67,7 @@ def page(cs, nxt):
 {NAV}
 
 <main id="main">
-  <section class="cs-hero">
+  <section class="cs-hero theme-dark">
     <div class="wrap">
       <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
       <div class="eyebrow">{cs["eyebrow"]}</div>
@@ -98,6 +100,7 @@ def page(cs, nxt):
       <div class="rv"><div class="eyebrow">By the numbers</div></div>
       <div class="stats" style="margin-top:30px">{stats}</div>{note}
       {f'<div class="stats" style="margin-top:40px">{stats2}</div>{note2}' if stats2 else ""}
+      {f'<div class="stats" style="margin-top:40px">{stats3}</div>{note3}' if stats3 else ""}
     </div>
   </section>
 
@@ -112,7 +115,7 @@ def page(cs, nxt):
   <a class="next wrap" href="/work/{nxt["slug"]}"><div class="eyebrow">Next case study</div><b>{nxt["title_plain"]} <i aria-hidden="true">→</i></b></a>
 </main>
 
-<footer><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
 <script src="/assets/site.js"></script>
 </body>
 </html>
@@ -124,30 +127,32 @@ YRD = "/assets/yrd"
 FR = "/assets/fris"
 CASES = [
     dict(
-        slug="fris", eyebrow="Case study · 01 · Risk intelligence platform",
-        title_plain="FRIS", title_html="FRIS <em>risk intelligence</em>",
-        summary="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, filings and regulators' releases through seven collectors, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.",
-        meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
-              ("Stack", "Python · FastAPI · PostgreSQL · LLM classification · Next.js · Recharts · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
+        slug="fris", eyebrow="Case study · 01 · Multi-agent risk intelligence",
+        title_plain="FRIS", title_html="FRIS <em>multi-agent risk intelligence</em>",
+        summary="A multi-agent risk-intelligence system that tracks 220 asset managers. A deterministic workflow collects news and regulators' releases, an LLM judges every development against an in-house risk framework, and a multi-agent quality layer inspects and corrects those judgements stage by stage, before a rules engine turns them into one explainable score per entity.",
+        meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, agents, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
+              ("Stack", "Python · LangGraph · FastAPI · PostgreSQL · Next.js · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
         frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4", poster=f"{FR}/poster.jpg",
         video_label="71-second screen recording of FRIS running on fictional entities and synthetic data",
         problem_h="Early warning, buried<br><em>in thousands of articles.</em>",
-        problem=["Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages.",
-                 "Most of it is noise. The same story is syndicated a dozen times, law-firm press releases make routine investigations sound alarming, and news about a parent company is not always news about its local subsidiary. A keyword alert drowns; a person cannot read it all.",
-                 "FRIS turns that stream into <b>one number per entity that an analyst can defend</b>: where it came from, which development set it, and what would bring it down."],
-        built_h="From raw news to a score<br><em>you can defend.</em>",
+        problem=["Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages, and most of them are noise.",
+                 "A language model can read that stream, but <b>its judgements go wrong in patterns</b>: a law-firm press release read as a lawsuit, a parent company's news pinned on its subsidiary, a reopening read as a resolution. Someone has to catch those errors every week, before clients see the result.",
+                 "FRIS does that with agents instead of people, and still produces <b>one number per entity that an analyst can defend</b>: where it came from, which development set it, and what would bring it down."],
+        built_h="Code sets the flow, models judge,<br><em>agents guard, rules score.</em>",
         blocks=[
-            dict(img=f"{FR}/dashboard.jpg", alt="FRIS dashboard with AI briefing and latest risk events", k="01 · INGESTION AND DEDUPLICATION", h="Eight sources, one clean event stream",
-                 p="Seven collectors pull from Google News, Yahoo Finance, SEC EDGAR and four regulators (ASIC, FCA, ESMA, SFC). Full text is extracted where it can be, and duplicates are removed before anything is scored.",
-                 points=["Deduplication by URL, title similarity and content hash, then 7-day semantic clustering into incidents", "A representative article per incident, chosen by content and source authority", "Parent-to-subsidiary propagation that judges whether a parent's news really applies"]),
-            dict(img=f"{FR}/waterline.jpg", alt="Risk Score Waterline chart", k="02 · AI JUDGES, ARITHMETIC SCORES", h="The LLM classifies; it never sets the score",
-                 p="Each development is classified by an LLM into one of 13 categories on a 20-point scale, under explicit consistency rules. The entity's score is then pure arithmetic: the highest category, with cooling over time and credit for mitigations.",
-                 points=["Law-firm solicitation releases capped, a 33-firm blacklist, repeat alerts merged", "Category scores cool after 60 days, or 180 while a legal matter is pending", "The waterline shows every move, with one marker per assessed development"]),
-            dict(img=f"{FR}/analysis.jpg", alt="Radar of category scores and written risk analysis", k="03 · EXPLAINABLE BY CONSTRUCTION", h="Every rating explains itself",
-                 p="The category radar shows what is driving the score today. The written analysis is generated from the scorer's own record, not free-form text, so every sentence traces back to a scored development.",
-                 points=["Rating, risk profile, trajectory, last 90 days, mitigation, open matters", "The same text goes into the PDF report for clients"]),
-            dict(img=f"{FR}/rankings.jpg", alt="Entity risk rankings table", k="04 · BUILT FOR CLIENT WORK", h="Rankings, watchlists, reports",
-                 p="A multi-layer ranking across all entities, client watchlists, regional and asset-class filters, a top-movers view, PDF export, and sign-in so clients see only their own watchlist."),
+            dict(img=f"{FR}/dashboard.jpg", alt="FRIS dashboard with AI briefing and latest risk events", k="01 · DETERMINISTIC WORKFLOW", h="One command, eight stages, no model in charge",
+                 p="Collection, deduplication, clustering windows, scoring formulas and cooling rules are all code. The weekly run starts with one command, checks its own window and model access, and every stage exits with a status code.",
+                 points=["Seven collectors: Google News, Yahoo Finance, SEC EDGAR, ASIC, FCA, ESMA, SFC", "Cross-source deduplication, then 7-day semantic clustering into incidents", "Parent-to-subsidiary propagation with rules for when a parent's news really applies"]),
+            dict(img=f"{FR}/agents.svg", alt="Diagram of the deterministic workflow with quality agents at each gate", k="02 · MULTI-AGENT QUALITY LAYER", h="Agents that supervise the model",
+                 p="Built on LangGraph and organised like supervision on a construction site: the pipeline is the contractor, the agents are the inspectors. Each agent owns one stage and checks it before the next stage reads the results, when a correction still affects nothing downstream.",
+                 points=["An inspector reads alongside the classifier in real time and can pause it when disagreement turns systematic", "Classification, clustering, mitigation and scoring agents each own one gate; one field has exactly one writer", "Agents coordinate through work items that must be closed within the run, not free-form chat"]),
+            dict(img=f"{FR}/waterline.jpg", alt="Risk Score Waterline chart", k="03 · CONSENSUS AND GUARDRAILS", h="The model proposes; code decides",
+                 p="A disputed verdict goes to three models from three different vendors: the producer explains its reasoning, an inspector reads the source blind, and a final reviewer rules. The ruling only lands if code-enforced guardrails pass.",
+                 points=["Quotes must appear verbatim in the source or rulebook; headline-only articles are never escalated", "Minimal moves only; each change is one transaction with a before-image and can be reverted", "Scores stay pure arithmetic: highest category, cooling over time, credit for mitigations"]),
+            dict(img=f"{FR}/analysis.jpg", alt="Radar of category scores and written risk analysis", k="04 · EXPLAINABLE BY CONSTRUCTION", h="Every rating explains itself",
+                 p="The category radar shows what is driving the score today, and the written analysis is generated from the scorer's own record, so every sentence traces back to a scored development. The same text goes into the PDF report for clients."),
+            dict(img=f"{FR}/rankings.jpg", alt="Entity risk rankings table", k="05 · BUILT FOR CLIENT WORK", h="Rankings, watchlists, reports",
+                 p="A multi-layer ranking across all entities, client watchlists, regional and asset-class filters, a top-movers view, PDF export, and sign-in so clients see only their own watchlist. A separate operations panel shows every run, every agent decision and its cost."),
         ],
         stats=[("288,534", "articles collected since launch"), ("114,810", "events classified by the LLM after deduplication"),
                ("9,485", "incidents clustered from those events"), ("220", "asset managers and entities monitored")],
@@ -155,13 +160,18 @@ CASES = [
         stats2=[("~1,960", "new articles in a typical week, from 7 collectors"), ("1.5<small>%</small>", "of them are genuine risk developments; 88% are irrelevant"),
                 ("2<small>h</small> 46<small>m</small>", "for the whole weekly pipeline, collection to scoring"), ("100<small>%</small>", "of events classified successfully that week")],
         stats2_note="A typical week: 12 to 18 October 2026.",
-        lessons_h="Most of the work is<br><em>removing noise.</em>",
-        lessons=[("Keep AI out of the arithmetic", "The model classifies and explains; the score is a deterministic function of the classified record. That makes every rating reproducible and every change attributable."),
-                 ("Calibrate the judge against a gold set", "A hand-labelled gold standard and regression runs check the classifier after every prompt or taxonomy change, so improvements are measured rather than assumed."),
-                 ("Design for the noise you actually see", "Syndication, law-firm solicitations, parent and subsidiary confusion and multi-language duplicates each got a specific, tested rule."),
-                 ("Make it operable", "One command runs the weekly update end to end in under three hours, backs up the database and writes the change log, so the system does not depend on its author being there.")],
+        stats3=[("6", "quality agents, each owning one stage of the pipeline"), ("3", "models from three vendors on every disputed verdict"),
+                ("87<small>%</small>", "of agent corrections upheld by independent adjudication"), ("97.9<small>%</small>", "verdict stability: 1,036 articles judged twice")],
+        stats3_note="Quality layer, first production run on 12 October 2026.",
+        lessons_h="An agent is only useful<br><em>if it can be held to account.</em>",
+        lessons=[("Code sets the flow, models judge", "The model never outputs a final score or decides what runs next. Every score change traces back to a specific event or a specific rule."),
+                 ("Every alert needs a recipient", "Agents don't raise warnings nobody reads. They issue work items to the agent downstream, which must accept or reject them, with a reason, in the same run."),
+                 ("One field, one writer", "Each field has exactly one agent allowed to change it. Agents run in pipeline order and downstream agents never overturn upstream ones."),
+                 ("The model proposes; code decides", "A ruling lands only if its quotes are found verbatim, the change is minimal and the score stays inside the category's range."),
+                 ("Agents earn their permissions", "Every agent change is adjudicated independently. Accuracy over recent runs sets next week's edit budget, down to observe-only below 50%."),
+                 ("Never block production", "The quality layer can fail without failing the weekly run: hard timeouts, a backup reviewer, and anything unfinished is dropped and logged.")],
         limits=["A monitoring signal for analysts, not investment advice or a credit rating.",
-                "Coverage depends on what sources publish; paywalls limit full text for some articles.",
+                "Independent adjudication of agent changes is still confirmed by a person; the scoring agent only observes for now.",
                 "The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed."],
     ),
     dict(

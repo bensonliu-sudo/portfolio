@@ -15,7 +15,7 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav" id="nav">
+<header class="nav theme-dark" id="nav">
   <div class="nav-in">
     <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
     <nav class="nav-links" aria-label="Main navigation">
@@ -29,7 +29,7 @@
 </header>
 
 <main id="main">
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero theme-dark" aria-labelledby="hero-title">
     <canvas id="flow" aria-hidden="true"></canvas>
     <div class="hero-in">
       <div class="eyebrow">Bingcheng Liu · 刘冰骋</div>
@@ -44,7 +44,7 @@
     <div class="scroll-cue" aria-hidden="true">Scroll<i></i></div>
   </section>
 
-  <div class="marquee" aria-hidden="true"><div class="marquee-track">
+  <div class="marquee theme-dark" aria-hidden="true"><div class="marquee-track">
     <span>AI agent systems</span><span>Full-stack apps</span><span>LLM workflows</span><span>Data platforms</span><span>Quantitative research</span><span>Trading systems</span><span>Python · FastAPI · SQL</span><span>Machine learning & NLP</span><span>Computer vision</span><span>Smart contracts</span>
     <span>AI agent systems</span><span>Full-stack apps</span><span>LLM workflows</span><span>Data platforms</span><span>Quantitative research</span><span>Trading systems</span><span>Python · FastAPI · SQL</span><span>Machine learning & NLP</span><span>Computer vision</span><span>Smart contracts</span>
   </div></div>
@@ -63,15 +63,15 @@
             <video data-auto src="/assets/fris/demo.mp4" poster="/assets/fris/poster.jpg" muted loop playsinline preload="metadata" aria-label="Screen recording of the FRIS risk intelligence platform on synthetic data"></video>
           </a>
           <div class="proj">
-            <div class="proj-num rv">01 · RISK INTELLIGENCE PLATFORM</div>
+            <div class="proj-num rv">01 · MULTI-AGENT RISK INTELLIGENCE</div>
             <h3 class="rv d1">FRIS</h3>
-            <p class="lead rv d2">Monitors 220 asset managers through seven collectors. An LLM classifies every development into 13 risk categories; a deterministic scorer turns them into one explainable risk score per entity.</p>
+            <p class="lead rv d2">A multi-agent system tracking 220 asset managers. A deterministic pipeline collects and scores every development; a layer of AI agents, each owning one stage, inspects and corrects the model's judgements before the next stage reads them.</p>
             <div class="mini rv d2">
               <div><b>288K</b><span>articles collected since launch</span></div>
-              <div><b>114K</b><span>events classified by the LLM</span></div>
-              <div><b data-count="220">220</b><span>entities monitored</span></div>
+              <div><b data-count="6">6</b><span>quality agents, one per stage</span></div>
+              <div><b>87<small>%</small></b><span>of agent corrections upheld</span></div>
             </div>
-            <div class="tags rv d3"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">LLM</span><span class="tag">Next.js</span><span class="tag">Azure</span></div>
+            <div class="tags rv d3"><span class="tag">Multi-agent</span><span class="tag">LangGraph</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Next.js</span></div>
             <a class="more-link rv d4" href="/work/fris">Read the case study <span aria-hidden="true">→</span></a>
           </div>
         </article>
@@ -117,7 +117,7 @@
     </div>
   </section>
 
-  <section id="approach" aria-labelledby="approach-title">
+  <section id="approach" class="theme-dark" aria-labelledby="approach-title">
     <div class="wrap">
       <div class="sec-head">
         <div class="rv"><div class="eyebrow">Approach</div><h2 id="approach-title">Built with AI.<br><em>Verified</em> like production.</h2></div>
@@ -160,7 +160,7 @@
   </section>
 </main>
 
-<footer><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
 
 <script src="/assets/site.js"></script>
 </body>

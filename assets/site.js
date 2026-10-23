@@ -2,8 +2,14 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // nav background after scrolling
+  // the nav takes the theme of whatever band is under it
   const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 30);
+  const darkBands = [...document.querySelectorAll('.theme-dark')].filter((el) => el !== nav);
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', scrollY > 30);
+    const y = 37;
+    nav.classList.toggle('theme-dark', darkBands.some((el) => { const r = el.getBoundingClientRect(); return r.top <= y && r.bottom > y; }));
+  };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // reveal on scroll + counters (final values are already in the HTML for no-JS readers)
