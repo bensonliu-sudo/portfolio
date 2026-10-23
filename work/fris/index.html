@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FRIS — Bingcheng Liu</title>
+<meta name="description" content="A multi-agent risk-intelligence system that tracks 220 asset managers. A deterministic workflow collects news and regulators&#x27; releases, an LLM judges every development against an in-house risk framework, and a multi-agent quality layer inspects and corrects those judgements stage by stage, before a rules engine turns them into one explainable score per entity.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#050b1a">
+<meta property="og:title" content="FRIS — Bingcheng Liu">
+<meta property="og:description" content="A multi-agent risk-intelligence system that tracks 220 asset managers. A deterministic workflow collects news and regulators&#x27; releases, an LLM judges every development against an in-house risk framework, and a multi-agent quality layer inspects and corrects those judgements stage by stage, before a rules engine turns them into one explainable score per entity.">
+<meta property="og:image" content="/assets/fris/poster.jpg">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav theme-dark" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/#work">Work</a>
+      <a href="/#approach" class="hide-s">Approach</a>
+      <a href="/#more">Projects</a>
+      <a href="/#about" class="hide-s">About</a>
+      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cs-hero theme-dark">
+    <div class="wrap">
+      <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
+      <div class="eyebrow">Case study · 01 · Multi-agent risk intelligence</div>
+      <h1>FRIS <em>multi-agent risk intelligence</em></h1>
+      <p class="lede">A multi-agent risk-intelligence system that tracks 220 asset managers. A deterministic workflow collects news and regulators' releases, an LLM judges every development against an in-house risk framework, and a multi-agent quality layer inspects and corrects those judgements stage by stage, before a rules engine turns them into one explainable score per entity.</p>
+      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer, built for an employer: data, AI pipeline, agents, backend, frontend, deployment</dd></div><div><dt>Timeline</dt><dd>February to October 2026</dd></div><div><dt>Stack</dt><dd>Python · LangGraph · FastAPI · PostgreSQL · Next.js · Azure</dd></div><div><dt>Status</dt><dd>Deployed to the cloud with sign-in; private repository</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="cs-video"><div class="wrap"><div class="frame rv"><div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>fris · risk dashboard</span></div><video data-auto src="/assets/fris/demo.mp4" poster="/assets/fris/poster.jpg" muted loop playsinline preload="metadata" controls aria-label="71-second screen recording of FRIS running on fictional entities and synthetic data"></video></div></div></section>
+
+  <section class="cs-sec">
+    <div class="wrap cs-two">
+      <div class="rv"><div class="eyebrow">The problem</div><h2>Early warning, buried<br><em>in thousands of articles.</em></h2></div>
+      <div class="prose rv d1"><p>Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages, and most of them are noise.</p><p>A language model can read that stream, but <b>its judgements go wrong in patterns</b>: a law-firm press release read as a lawsuit, a parent company's news pinned on its subsidiary, a reopening read as a resolution. Someone has to catch those errors every week, before clients see the result.</p><p>FRIS does that with agents instead of people, and still produces <b>one number per entity that an analyst can defend</b>: where it came from, which development set it, and what would bring it down.</p></div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">What I built</div><h2>Code sets the flow, models judge,<br><em>agents guard, rules score.</em></h2></div>
+      <div class="blocks">
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/fris/dashboard.jpg"><img src="/assets/fris/dashboard.jpg" alt="FRIS dashboard with AI briefing and latest risk events" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">01 · DETERMINISTIC WORKFLOW</div><h3>One command, eight stages, no model in charge</h3><p>Collection, deduplication, clustering windows, scoring formulas and cooling rules are all code. The weekly run starts with one command, checks its own window and model access, and every stage exits with a status code.</p><ul><li>Seven collectors: Google News, Yahoo Finance, SEC EDGAR, ASIC, FCA, ESMA, SFC</li><li>Cross-source deduplication, then 7-day semantic clustering into incidents</li><li>Parent-to-subsidiary propagation with rules for when a parent's news really applies</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/fris/agents.svg"><img src="/assets/fris/agents.svg" alt="Diagram of the deterministic workflow with quality agents at each gate" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">02 · MULTI-AGENT QUALITY LAYER</div><h3>Agents that supervise the model</h3><p>Built on LangGraph and organised like supervision on a construction site: the pipeline is the contractor, the agents are the inspectors. Each agent owns one stage and checks it before the next stage reads the results, when a correction still affects nothing downstream.</p><ul><li>An inspector reads alongside the classifier in real time and can pause it when disagreement turns systematic</li><li>Classification, clustering, mitigation and scoring agents each own one gate; one field has exactly one writer</li><li>Agents coordinate through work items that must be closed within the run, not free-form chat</li></ul></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/fris/waterline.jpg"><img src="/assets/fris/waterline.jpg" alt="Risk Score Waterline chart" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">03 · CONSENSUS AND GUARDRAILS</div><h3>The model proposes; code decides</h3><p>A disputed verdict goes to three models from three different vendors: the producer explains its reasoning, an inspector reads the source blind, and a final reviewer rules. The ruling only lands if code-enforced guardrails pass.</p><ul><li>Quotes must appear verbatim in the source or rulebook; headline-only articles are never escalated</li><li>Minimal moves only; each change is one transaction with a before-image and can be reverted</li><li>Scores stay pure arithmetic: highest category, cooling over time, credit for mitigations</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/fris/analysis.jpg"><img src="/assets/fris/analysis.jpg" alt="Radar of category scores and written risk analysis" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">04 · EXPLAINABLE BY CONSTRUCTION</div><h3>Every rating explains itself</h3><p>The category radar shows what is driving the score today, and the written analysis is generated from the scorer's own record, so every sentence traces back to a scored development. The same text goes into the PDF report for clients.</p></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/fris/rankings.jpg"><img src="/assets/fris/rankings.jpg" alt="Entity risk rankings table" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">05 · BUILT FOR CLIENT WORK</div><h3>Rankings, watchlists, reports</h3><p>A multi-layer ranking across all entities, client watchlists, regional and asset-class filters, a top-movers view, PDF export, and sign-in so clients see only their own watchlist. A separate operations panel shows every run, every agent decision and its cost.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">By the numbers</div></div>
+      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>288,534</b><span>articles collected since launch</span></div><div class="stat rv d1"><b>114,810</b><span>events classified by the LLM after deduplication</span></div><div class="stat rv d2"><b>9,485</b><span>incidents clustered from those events</span></div><div class="stat rv d3"><b>220</b><span>asset managers and entities monitored</span></div></div><p class="stats-note rv">Cumulative, as of the weekly run of 18 October 2026.</p>
+      <div class="stats" style="margin-top:40px"><div class="stat rv"><b>~1,960</b><span>new articles in a typical week, from 7 collectors</span></div><div class="stat rv d1"><b>1.5<small>%</small></b><span>of them are genuine risk developments; 88% are irrelevant</span></div><div class="stat rv d2"><b>2<small>h</small> 46<small>m</small></b><span>for the whole weekly pipeline, collection to scoring</span></div><div class="stat rv d3"><b>100<small>%</small></b><span>of events classified successfully that week</span></div></div><p class="stats-note rv">A typical week: 12 to 18 October 2026.</p>
+      <div class="stats" style="margin-top:40px"><div class="stat rv"><b>6</b><span>quality agents, each owning one stage of the pipeline</span></div><div class="stat rv d1"><b>3</b><span>models from three vendors on every disputed verdict</span></div><div class="stat rv d2"><b>87<small>%</small></b><span>of agent corrections upheld by independent adjudication</span></div><div class="stat rv d3"><b>97.9<small>%</small></b><span>verdict stability: 1,036 articles judged twice</span></div></div><p class="stats-note rv">Quality layer, first production run on 12 October 2026.</p>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">How it was built</div><h2>An agent is only useful<br><em>if it can be held to account.</em></h2></div>
+      <div class="lessons"><div class="lesson rv"><b>Code sets the flow, models judge</b><p>The model never outputs a final score or decides what runs next. Every score change traces back to a specific event or a specific rule.</p></div><div class="lesson rv d1"><b>Every alert needs a recipient</b><p>Agents don't raise warnings nobody reads. They issue work items to the agent downstream, which must accept or reject them, with a reason, in the same run.</p></div><div class="lesson rv"><b>One field, one writer</b><p>Each field has exactly one agent allowed to change it. Agents run in pipeline order and downstream agents never overturn upstream ones.</p></div><div class="lesson rv d1"><b>The model proposes; code decides</b><p>A ruling lands only if its quotes are found verbatim, the change is minimal and the score stays inside the category's range.</p></div><div class="lesson rv"><b>Agents earn their permissions</b><p>Every agent change is adjudicated independently. Accuracy over recent runs sets next week's edit budget, down to observe-only below 50%.</p></div><div class="lesson rv d1"><b>Never block production</b><p>The quality layer can fail without failing the weekly run: hard timeouts, a backup reviewer, and anything unfinished is dropped and logged.</p></div></div>
+      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>A monitoring signal for analysts, not investment advice or a credit rating.</li><li>Independent adjudication of agent changes is still confirmed by a person; the scoring agent only observes for now.</li><li>The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed.</li></ul></div>
+    </div>
+  </section>
+
+  <a class="next wrap" href="/work/multifactor-scoring"><div class="eyebrow">Next case study</div><b>Multi-factor stock scoring <i aria-hidden="true">→</i></b></a>
+</main>
+
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

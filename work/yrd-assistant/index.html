@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YRD Assistant — Bingcheng Liu</title>
+<meta name="description" content="A desktop assistant that runs a financial publisher&#x27;s daily report workflow: it finds the morning market commentary in Outlook, writes each section into the right WordPress draft, and drafts the confirmation email, while a person stays in charge of publishing.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#050b1a">
+<meta property="og:title" content="YRD Assistant — Bingcheng Liu">
+<meta property="og:description" content="A desktop assistant that runs a financial publisher&#x27;s daily report workflow: it finds the morning market commentary in Outlook, writes each section into the right WordPress draft, and drafts the confirmation email, while a person stays in charge of publishing.">
+<meta property="og:image" content="/assets/yrd/poster.jpg">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav theme-dark" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/#work">Work</a>
+      <a href="/#approach" class="hide-s">Approach</a>
+      <a href="/#more">Projects</a>
+      <a href="/#about" class="hide-s">About</a>
+      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cs-hero theme-dark">
+    <div class="wrap">
+      <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
+      <div class="eyebrow">Case study · 03 · Workflow automation</div>
+      <h1>YRD <em>Assistant</em></h1>
+      <p class="lede">A desktop assistant that runs a financial publisher's daily report workflow: it finds the morning market commentary in Outlook, writes each section into the right WordPress draft, and drafts the confirmation email, while a person stays in charge of publishing.</p>
+      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer, built for an employer</dd></div><div><dt>Timeline</dt><dd>March to May 2026</dd></div><div><dt>Stack</dt><dd>Node.js · Electron · Python · Outlook COM · WordPress REST API</dd></div><div><dt>Status</dt><dd>Delivered; private repository</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="cs-video"><div class="wrap"><div class="frame win rv"><div class="frame-bar" aria-hidden="true"><span>YRD Assistant · desktop app</span><em>– □ ×</em></div><video data-auto src="/assets/yrd/demo.mp4" poster="/assets/yrd/poster.jpg" muted loop playsinline preload="metadata" controls aria-label="46-second screen recording of YRD Assistant running on synthetic content"></video></div></div></section>
+
+  <section class="cs-sec">
+    <div class="wrap cs-two">
+      <div class="rv"><div class="eyebrow">The problem</div><h2>A daily copy-paste job<br><em>that had to be perfect.</em></h2></div>
+      <div class="prose rv d1"><p>Every business day the publisher releases a bonds report and an equities report. The market commentary arrives by email in the morning, and someone has to copy <b>four sections into two WordPress drafts</b>, each under exactly the right heading, without disturbing the charts, tables and ads around them.</p><p>Then they confirm by email. It is repetitive, time-boxed, and the emails are messier than they look: reply threads carry yesterday's commentary, section order changes, headings run into the first sentence.</p><p>The goal was to automate the tedious part <b>without taking the human out of the loop</b>: nothing is ever published automatically.</p></div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">What I built</div><h2>Three layers, one<br><em>guided workflow.</em></h2></div>
+      <div class="blocks">
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/yrd/dryrun.jpg"><img src="/assets/yrd/dryrun.jpg" alt="Dry run result with matched drafts" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">01 · MAIL INTAKE</div><h3>Find the right email, read it robustly</h3><p>A Python intake step scans today's Outlook inbox newest first and recognises the commentary by its four section headings rather than a fixed intro sentence.</p><ul><li>Ignores quoted reply threads, so old commentary never overrides today's</li><li>Works with any section order, inline headings and divider lines</li><li>Extracts the business date and retries while the mailbox is still starting up</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/yrd/draft.jpg"><img src="/assets/yrd/draft.jpg" alt="WordPress draft with inserted sections highlighted" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">02 · DRAFT UPDATER</div><h3>Write into WordPress, never publish</h3><p>A Node service finds the latest bonds and equities drafts through the WordPress REST API, matches each section heading in the post HTML and inserts the text beneath it.</p><ul><li>Dry run first: validates every match before anything is written</li><li>Cleans empty filler markup so spacing matches the house style</li><li>Charts, tables and ad tags are left exactly as they were; posts stay in Draft</li></ul></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/yrd/done.jpg"><img src="/assets/yrd/done.jpg" alt="Completed workflow with confirmation draft ready" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">03 · DESKTOP ASSISTANT</div><h3>One screen, five steps, a human in charge</h3><p>An Electron app wraps the scripts in a guided flow: scan, review the dry run, generate drafts, publish manually in WordPress, then create the confirmation email as a reply-all draft for review.</p><ul><li>Auto-scans during the morning window and retries every five minutes</li><li>Resettable run state, so a new operator can test without restarting anything</li><li>Browser fallback when the desktop shell is unavailable</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">By the numbers</div></div>
+      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>4</b><span>commentary sections placed into 2 reports every business day</span></div><div class="stat rv d1"><b>5</b><span>guided steps from inbox to confirmation email</span></div><div class="stat rv d2"><b>11</b><span>real production issues logged, root-caused and fixed</span></div><div class="stat rv d3"><b>0</b><span>automatic publishes: a person always signs off</span></div></div>
+      
+      
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">How it was built</div><h2>Real inputs are<br><em>messier than the spec.</em></h2></div>
+      <div class="lessons"><div class="lesson rv"><b>Match on meaning, not on literals</b><p>Early versions keyed on a fixed intro sentence and exact heading names. Real emails broke both, so recognition moved to normalised section keys that tolerate variants and reordering.</p></div><div class="lesson rv d1"><b>Verify against real content</b><p>Spacing bugs only showed up in the live drafts' raw HTML, not in local templates. Fixes were checked against the real post content before release.</p></div><div class="lesson rv"><b>Keep a maintenance log</b><p>Every fault gets a symptom, root cause, fix and status. Eleven entries in three months show where the fragile edges are.</p></div><div class="lesson rv d1"><b>Automate the work, not the judgement</b><p>The tool prepares everything up to the publish button and drafts the follow-up email; deciding to publish and send stays with a person.</p></div></div>
+      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>Windows only: mail intake depends on the Outlook desktop client through COM.</li><li>An internal tool for one publishing workflow, not a general product.</li><li>The recording runs the real interface against a demo backend with synthetic commentary; publisher names and addresses are removed.</li></ul></div>
+    </div>
+  </section>
+
+  <a class="next wrap" href="/work/fris"><div class="eyebrow">Next case study</div><b>FRIS <i aria-hidden="true">→</i></b></a>
+</main>
+
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

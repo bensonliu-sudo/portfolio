@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Multi-factor stock scoring — Bingcheng Liu</title>
+<meta name="description" content="A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#050b1a">
+<meta property="og:title" content="Multi-factor stock scoring — Bingcheng Liu">
+<meta property="og:description" content="A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.">
+<meta property="og:image" content="/assets/multifactor/poster.jpg">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav theme-dark" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/#work">Work</a>
+      <a href="/#approach" class="hide-s">Approach</a>
+      <a href="/#more">Projects</a>
+      <a href="/#about" class="hide-s">About</a>
+      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cs-hero theme-dark">
+    <div class="wrap">
+      <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
+      <div class="eyebrow">Case study · 02 · Equity research tooling</div>
+      <h1>Multi-factor<br><em>stock scoring</em></h1>
+      <p class="lede">A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.</p>
+      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer: design, backend, frontend, tests</dd></div><div><dt>Year</dt><dd>2026</dd></div><div><dt>Stack</dt><dd>Python · FastAPI · NumPy · SQLite · vanilla JS</dd></div><div><dt>Status</dt><dd>Working tool; private repository, source on request</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="cs-video"><div class="wrap"><div class="frame rv"><div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>multi-factor-scoring · live walkthrough</span></div><video data-auto src="/assets/multifactor/demo.mp4" poster="/assets/multifactor/poster.jpg" muted loop playsinline preload="metadata" controls aria-label="37-second screen recording of the multi-factor scoring tool on synthetic data"></video></div></div></section>
+
+  <section class="cs-sec">
+    <div class="wrap cs-two">
+      <div class="rv"><div class="eyebrow">The problem</div><h2>Pools built by hand,<br><em>hard to explain.</em></h2></div>
+      <div class="prose rv d1"><p>Research teams often build their candidate pools in spreadsheets: standardise a handful of factors, weight them, sort, take the top N. It works until someone asks <b>why a stock is in the pool</b>, or what changed since last week.</p><p>A changed weight leaves no trace, rounding differs between sheets, and outliers quietly dominate a score. The scoring itself is simple; making it <b>exact, explainable and reproducible</b> is the real work.</p><p>This tool takes the factor choices as given and does that part properly. Choosing factors, optimising weights and backtesting are deliberately out of scope.</p></div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">What I built</div><h2>A scoring layer that<br><em>shows its working.</em></h2></div>
+      <div class="blocks">
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/multifactor/overview.jpg"><img src="/assets/multifactor/overview.jpg" alt="Stock pool overview" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">01 · SCORING ENGINE</div><h3>Exact, deterministic scores</h3><p>Every factor is winsorised at k standard deviations, standardised, signed by its direction and weighted. The same data and configuration always produce the same pool, down to the last digit.</p><ul><li>Optional industry-neutral standardisation</li><li>Missing values handled explicitly, never silently dropped</li><li>Bit-exact regression against an independent reference</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/multifactor/sandbox.jpg"><img src="/assets/multifactor/sandbox.jpg" alt="Weight sandbox showing rank changes" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">02 · WEIGHT SANDBOX</div><h3>Change a weight, see the consequences</h3><p>Drag any weight and the pool re-scores instantly. The table shows which stocks entered or left the pool and how far each one moved, against the last official run.</p><ul><li>Sandbox runs never overwrite the official result</li><li>Filter to entered, exited, up or down</li><li>One click to save a sandbox as the new official run</li></ul></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/multifactor/detail.jpg"><img src="/assets/multifactor/detail.jpg" alt="Factor-level score breakdown" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">03 · CUTOFF EXPLANATION</div><h3>Why this stock is in, or out</h3><p>For any stock, a factor-by-factor breakdown: raw and clipped values, standardised score, weight and contribution, plus the distance to the rank-N cutoff and the factor that drives it.</p></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/multifactor/history.jpg"><img src="/assets/multifactor/history.jpg" alt="Run history" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">04 · AUDIT TRAIL</div><h3>Every run can be reproduced</h3><p>Each run is stored with a snapshot of its configuration and a fingerprint of its input data, so any past pool can be traced and rebuilt. Results export to CSV.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">By the numbers</div></div>
+      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>5,000</b><span>stocks × 10 factors scored per request in the stress test</span></div><div class="stat rv d1"><b>&lt; 0.6<small>s</small></b><span>slowest full HTTP request, scoring and persistence included</span></div><div class="stat rv d2"><b>166</b><span>automated tests, including bit-exact regression against a reference</span></div><div class="stat rv d3"><b>15</b><span>documented AI errors caught by independent review and fixed</span></div></div>
+      
+      
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">How it was built</div><h2>Built with AI,<br><em>verified</em> like production.</h2></div>
+      <div class="lessons"><div class="lesson rv"><b>Pin down the spec first</b><p>Every ambiguous rule (rounding, ties, missing values, clipping order) was written down and checked against an independent reference implementation before features were built on it.</p></div><div class="lesson rv d1"><b>Ship in gated packages</b><p>Engine, service, frontend and performance were separate packages. Each was frozen, hashed and reviewed before the next one started.</p></div><div class="lesson rv"><b>Independent adversarial review</b><p>A second AI re-computed results, injected faults and replayed real usage. Fifteen genuine errors were found this way; each one is documented with its fix.</p></div><div class="lesson rv d1"><b>Measure, don't assume</b><p>Performance claims come from a stress test at 5,000 stocks and 10 factors, timed end to end through the HTTP API.</p></div></div>
+      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>Scores one cross-section at a time; multi-period data and incremental updates are future work.</li><li>No factor research, weight optimisation or backtesting, by design.</li><li>Demo data is synthetic: 200 sample companies across 10 industries.</li></ul></div>
+    </div>
+  </section>
+
+  <a class="next wrap" href="/work/yrd-assistant"><div class="eyebrow">Next case study</div><b>YRD Assistant <i aria-hidden="true">→</i></b></a>
+</main>
+
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>
