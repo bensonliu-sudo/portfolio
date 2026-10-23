@@ -222,3 +222,5 @@ a.frame{display:block}
   .cs-meta div{padding:16px 10px 0 0}.cs-meta div+div{padding-left:10px}
 }
 .mini b small{font-size:.5em;color:var(--accent);margin-left:3px}
+.stats-note{margin:14px 0 0;font:12px var(--mono);color:var(--faint);letter-spacing:.04em}
+@media(max-width:640px){.stat:nth-child(odd){padding-left:0;border-left:0}}

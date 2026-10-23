@@ -40,6 +40,9 @@ def page(cs, nxt):
           <div class="rv d1"><div class="k">{b["k"]}</div><h3>{b["h"]}</h3><p>{b["p"]}</p>{f"<ul>{items}</ul>" if items else ""}</div>
         </div>''')
     stats = "".join(f'<div class="stat rv{" d%d" % i if i else ""}"><b>{v}</b><span>{t}</span></div>' for i, (v, t) in enumerate(cs["stats"]))
+    stats2 = "".join(f'<div class="stat rv{" d%d" % i if i else ""}"><b>{v}</b><span>{t}</span></div>' for i, (v, t) in enumerate(cs.get("stats2", [])))
+    note = f'<p class="stats-note rv">{cs["stats_note"]}</p>' if cs.get("stats_note") else ""
+    note2 = f'<p class="stats-note rv">{cs["stats2_note"]}</p>' if cs.get("stats2_note") else ""
     lessons = "".join(f'<div class="lesson rv{" d1" if i % 2 else ""}"><b>{h}</b><p>{t}</p></div>' for i, (h, t) in enumerate(cs["lessons"]))
     limits = "".join(f"<li>{x}</li>" for x in cs["limits"])
     problem = "".join(f"<p>{x}</p>" for x in cs["problem"])
@@ -93,7 +96,8 @@ def page(cs, nxt):
   <section class="cs-sec">
     <div class="wrap">
       <div class="rv"><div class="eyebrow">By the numbers</div></div>
-      <div class="stats" style="margin-top:30px">{stats}</div>
+      <div class="stats" style="margin-top:30px">{stats}</div>{note}
+      {f'<div class="stats" style="margin-top:40px">{stats2}</div>{note2}' if stats2 else ""}
     </div>
   </section>
 
@@ -122,7 +126,7 @@ CASES = [
     dict(
         slug="fris", eyebrow="Case study · 01 · Risk intelligence platform",
         title_plain="FRIS", title_html="FRIS <em>risk intelligence</em>",
-        summary="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.",
+        summary="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, filings and regulators' releases through seven collectors, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.",
         meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
               ("Stack", "Python · FastAPI · PostgreSQL · LLM classification · Next.js · Recharts · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
         frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4", poster=f"{FR}/poster.jpg",
@@ -134,7 +138,7 @@ CASES = [
         built_h="From raw news to a score<br><em>you can defend.</em>",
         blocks=[
             dict(img=f"{FR}/dashboard.jpg", alt="FRIS dashboard with AI briefing and latest risk events", k="01 · INGESTION AND DEDUPLICATION", h="Eight sources, one clean event stream",
-                 p="Collectors pull from news terminals, Google News, Yahoo Finance, SEC EDGAR and four regulators' releases. Full text is extracted where it can be, and duplicates are removed before anything is scored.",
+                 p="Seven collectors pull from Google News, Yahoo Finance, SEC EDGAR and four regulators (ASIC, FCA, ESMA, SFC). Full text is extracted where it can be, and duplicates are removed before anything is scored.",
                  points=["Deduplication by URL, title similarity and content hash, then 7-day semantic clustering into incidents", "A representative article per incident, chosen by content and source authority", "Parent-to-subsidiary propagation that judges whether a parent's news really applies"]),
             dict(img=f"{FR}/waterline.jpg", alt="Risk Score Waterline chart", k="02 · AI JUDGES, ARITHMETIC SCORES", h="The LLM classifies; it never sets the score",
                  p="Each development is classified by an LLM into one of 13 categories on a 20-point scale, under explicit consistency rules. The entity's score is then pure arithmetic: the highest category, with cooling over time and credit for mitigations.",
@@ -145,13 +149,17 @@ CASES = [
             dict(img=f"{FR}/rankings.jpg", alt="Entity risk rankings table", k="04 · BUILT FOR CLIENT WORK", h="Rankings, watchlists, reports",
                  p="A multi-layer ranking across all entities, client watchlists, regional and asset-class filters, a top-movers view, PDF export, and sign-in so clients see only their own watchlist."),
         ],
-        stats=[("~220", "asset managers and entities monitored"), ("8", "data sources, from news to regulators' releases"),
-               ("13", "risk categories on a 20-point severity scale"), ("~7<small>h</small>", "fully automated weekly update, end to end")],
+        stats=[("288,534", "articles collected since launch"), ("114,810", "events classified by the LLM after deduplication"),
+               ("9,485", "incidents clustered from those events"), ("220", "asset managers and entities monitored")],
+        stats_note="Cumulative, as of the weekly run of 18 October 2026.",
+        stats2=[("~1,960", "new articles in a typical week, from 7 collectors"), ("1.5<small>%</small>", "of them are genuine risk developments; 88% are irrelevant"),
+                ("2<small>h</small> 46<small>m</small>", "for the whole weekly pipeline, collection to scoring"), ("100<small>%</small>", "of events classified successfully that week")],
+        stats2_note="A typical week: 12 to 18 October 2026.",
         lessons_h="Most of the work is<br><em>removing noise.</em>",
         lessons=[("Keep AI out of the arithmetic", "The model classifies and explains; the score is a deterministic function of the classified record. That makes every rating reproducible and every change attributable."),
                  ("Calibrate the judge against a gold set", "A hand-labelled gold standard and regression runs check the classifier after every prompt or taxonomy change, so improvements are measured rather than assumed."),
                  ("Design for the noise you actually see", "Syndication, law-firm solicitations, parent and subsidiary confusion and multi-language duplicates each got a specific, tested rule."),
-                 ("Make it operable", "One command runs the weekly update end to end, backs up the database and writes the change log, so the system does not depend on its author being there.")],
+                 ("Make it operable", "One command runs the weekly update end to end in under three hours, backs up the database and writes the change log, so the system does not depend on its author being there.")],
         limits=["A monitoring signal for analysts, not investment advice or a credit rating.",
                 "Coverage depends on what sources publish; paywalls limit full text for some articles.",
                 "The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed."],

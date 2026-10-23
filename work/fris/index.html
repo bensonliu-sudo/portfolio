@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FRIS — Bingcheng Liu</title>
-<meta name="description" content="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.">
+<meta name="description" content="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, filings and regulators&#x27; releases through seven collectors, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#050b1a">
 <meta property="og:title" content="FRIS — Bingcheng Liu">
-<meta property="og:description" content="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.">
+<meta property="og:description" content="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, filings and regulators&#x27; releases through seven collectors, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.">
 <meta property="og:image" content="/assets/fris/poster.jpg">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
@@ -33,7 +33,7 @@
       <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
       <div class="eyebrow">Case study · 01 · Risk intelligence platform</div>
       <h1>FRIS <em>risk intelligence</em></h1>
-      <p class="lede">A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.</p>
+      <p class="lede">A risk-intelligence platform that monitors around 220 asset managers. It gathers news, filings and regulators' releases through seven collectors, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.</p>
       <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer, built for an employer: data, AI pipeline, backend, frontend, deployment</dd></div><div><dt>Timeline</dt><dd>February to October 2026</dd></div><div><dt>Stack</dt><dd>Python · FastAPI · PostgreSQL · LLM classification · Next.js · Recharts · Azure</dd></div><div><dt>Status</dt><dd>Deployed to the cloud with sign-in; private repository</dd></div></dl>
     </div>
   </section>
@@ -53,7 +53,7 @@
       <div class="blocks">
         <div class="block">
           <figure class="shot rv"><a href="/assets/fris/dashboard.jpg"><img src="/assets/fris/dashboard.jpg" alt="FRIS dashboard with AI briefing and latest risk events" loading="lazy"></a></figure>
-          <div class="rv d1"><div class="k">01 · INGESTION AND DEDUPLICATION</div><h3>Eight sources, one clean event stream</h3><p>Collectors pull from news terminals, Google News, Yahoo Finance, SEC EDGAR and four regulators' releases. Full text is extracted where it can be, and duplicates are removed before anything is scored.</p><ul><li>Deduplication by URL, title similarity and content hash, then 7-day semantic clustering into incidents</li><li>A representative article per incident, chosen by content and source authority</li><li>Parent-to-subsidiary propagation that judges whether a parent's news really applies</li></ul></div>
+          <div class="rv d1"><div class="k">01 · INGESTION AND DEDUPLICATION</div><h3>Eight sources, one clean event stream</h3><p>Seven collectors pull from Google News, Yahoo Finance, SEC EDGAR and four regulators (ASIC, FCA, ESMA, SFC). Full text is extracted where it can be, and duplicates are removed before anything is scored.</p><ul><li>Deduplication by URL, title similarity and content hash, then 7-day semantic clustering into incidents</li><li>A representative article per incident, chosen by content and source authority</li><li>Parent-to-subsidiary propagation that judges whether a parent's news really applies</li></ul></div>
         </div>
         <div class="block flip">
           <figure class="shot rv"><a href="/assets/fris/waterline.jpg"><img src="/assets/fris/waterline.jpg" alt="Risk Score Waterline chart" loading="lazy"></a></figure>
@@ -74,14 +74,15 @@
   <section class="cs-sec">
     <div class="wrap">
       <div class="rv"><div class="eyebrow">By the numbers</div></div>
-      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>~220</b><span>asset managers and entities monitored</span></div><div class="stat rv d1"><b>8</b><span>data sources, from news to regulators' releases</span></div><div class="stat rv d2"><b>13</b><span>risk categories on a 20-point severity scale</span></div><div class="stat rv d3"><b>~7<small>h</small></b><span>fully automated weekly update, end to end</span></div></div>
+      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>288,534</b><span>articles collected since launch</span></div><div class="stat rv d1"><b>114,810</b><span>events classified by the LLM after deduplication</span></div><div class="stat rv d2"><b>9,485</b><span>incidents clustered from those events</span></div><div class="stat rv d3"><b>220</b><span>asset managers and entities monitored</span></div></div><p class="stats-note rv">Cumulative, as of the weekly run of 18 October 2026.</p>
+      <div class="stats" style="margin-top:40px"><div class="stat rv"><b>~1,960</b><span>new articles in a typical week, from 7 collectors</span></div><div class="stat rv d1"><b>1.5<small>%</small></b><span>of them are genuine risk developments; 88% are irrelevant</span></div><div class="stat rv d2"><b>2<small>h</small> 46<small>m</small></b><span>for the whole weekly pipeline, collection to scoring</span></div><div class="stat rv d3"><b>100<small>%</small></b><span>of events classified successfully that week</span></div></div><p class="stats-note rv">A typical week: 12 to 18 October 2026.</p>
     </div>
   </section>
 
   <section class="cs-sec">
     <div class="wrap">
       <div class="rv"><div class="eyebrow">How it was built</div><h2>Most of the work is<br><em>removing noise.</em></h2></div>
-      <div class="lessons"><div class="lesson rv"><b>Keep AI out of the arithmetic</b><p>The model classifies and explains; the score is a deterministic function of the classified record. That makes every rating reproducible and every change attributable.</p></div><div class="lesson rv d1"><b>Calibrate the judge against a gold set</b><p>A hand-labelled gold standard and regression runs check the classifier after every prompt or taxonomy change, so improvements are measured rather than assumed.</p></div><div class="lesson rv"><b>Design for the noise you actually see</b><p>Syndication, law-firm solicitations, parent and subsidiary confusion and multi-language duplicates each got a specific, tested rule.</p></div><div class="lesson rv d1"><b>Make it operable</b><p>One command runs the weekly update end to end, backs up the database and writes the change log, so the system does not depend on its author being there.</p></div></div>
+      <div class="lessons"><div class="lesson rv"><b>Keep AI out of the arithmetic</b><p>The model classifies and explains; the score is a deterministic function of the classified record. That makes every rating reproducible and every change attributable.</p></div><div class="lesson rv d1"><b>Calibrate the judge against a gold set</b><p>A hand-labelled gold standard and regression runs check the classifier after every prompt or taxonomy change, so improvements are measured rather than assumed.</p></div><div class="lesson rv"><b>Design for the noise you actually see</b><p>Syndication, law-firm solicitations, parent and subsidiary confusion and multi-language duplicates each got a specific, tested rule.</p></div><div class="lesson rv d1"><b>Make it operable</b><p>One command runs the weekly update end to end in under three hours, backs up the database and writes the change log, so the system does not depend on its author being there.</p></div></div>
       <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>A monitoring signal for analysts, not investment advice or a credit rating.</li><li>Coverage depends on what sources publish; paywalls limit full text for some articles.</li><li>The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed.</li></ul></div>
     </div>
   </section>
