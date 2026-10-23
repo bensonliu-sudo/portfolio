@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FRIS — Bingcheng Liu</title>
+<meta name="description" content="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#050b1a">
+<meta property="og:title" content="FRIS — Bingcheng Liu">
+<meta property="og:description" content="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.">
+<meta property="og:image" content="/assets/fris/poster.jpg">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/#work">Work</a>
+      <a href="/#approach" class="hide-s">Approach</a>
+      <a href="/#more">Projects</a>
+      <a href="/#about" class="hide-s">About</a>
+      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cs-hero">
+    <div class="wrap">
+      <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
+      <div class="eyebrow">Case study · 01 · Risk intelligence platform</div>
+      <h1>FRIS <em>risk intelligence</em></h1>
+      <p class="lede">A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.</p>
+      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer, built for an employer: data, AI pipeline, backend, frontend, deployment</dd></div><div><dt>Timeline</dt><dd>February to October 2026</dd></div><div><dt>Stack</dt><dd>Python · FastAPI · PostgreSQL · LLM classification · Next.js · Recharts · Azure</dd></div><div><dt>Status</dt><dd>Deployed to the cloud with sign-in; private repository</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="cs-video"><div class="wrap"><div class="frame rv"><div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>fris · risk dashboard</span></div><video data-auto src="/assets/fris/demo.mp4" poster="/assets/fris/poster.jpg" muted loop playsinline preload="metadata" controls aria-label="71-second screen recording of FRIS running on fictional entities and synthetic data"></video></div></div></section>
+
+  <section class="cs-sec">
+    <div class="wrap cs-two">
+      <div class="rv"><div class="eyebrow">The problem</div><h2>Early warning, buried<br><em>in thousands of articles.</em></h2></div>
+      <div class="prose rv d1"><p>Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages.</p><p>Most of it is noise. The same story is syndicated a dozen times, law-firm press releases make routine investigations sound alarming, and news about a parent company is not always news about its local subsidiary. A keyword alert drowns; a person cannot read it all.</p><p>FRIS turns that stream into <b>one number per entity that an analyst can defend</b>: where it came from, which development set it, and what would bring it down.</p></div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">What I built</div><h2>From raw news to a score<br><em>you can defend.</em></h2></div>
+      <div class="blocks">
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/fris/dashboard.jpg"><img src="/assets/fris/dashboard.jpg" alt="FRIS dashboard with AI briefing and latest risk events" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">01 · INGESTION AND DEDUPLICATION</div><h3>Eight sources, one clean event stream</h3><p>Collectors pull from news terminals, Google News, Yahoo Finance, SEC EDGAR and four regulators' releases. Full text is extracted where it can be, and duplicates are removed before anything is scored.</p><ul><li>Deduplication by URL, title similarity and content hash, then 7-day semantic clustering into incidents</li><li>A representative article per incident, chosen by content and source authority</li><li>Parent-to-subsidiary propagation that judges whether a parent's news really applies</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/fris/waterline.jpg"><img src="/assets/fris/waterline.jpg" alt="Risk Score Waterline chart" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">02 · AI JUDGES, ARITHMETIC SCORES</div><h3>The LLM classifies; it never sets the score</h3><p>Each development is classified by an LLM into one of 13 categories on a 20-point scale, under explicit consistency rules. The entity's score is then pure arithmetic: the highest category, with cooling over time and credit for mitigations.</p><ul><li>Law-firm solicitation releases capped, a 33-firm blacklist, repeat alerts merged</li><li>Category scores cool after 60 days, or 180 while a legal matter is pending</li><li>The waterline shows every move, with one marker per assessed development</li></ul></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/fris/analysis.jpg"><img src="/assets/fris/analysis.jpg" alt="Radar of category scores and written risk analysis" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">03 · EXPLAINABLE BY CONSTRUCTION</div><h3>Every rating explains itself</h3><p>The category radar shows what is driving the score today. The written analysis is generated from the scorer's own record, not free-form text, so every sentence traces back to a scored development.</p><ul><li>Rating, risk profile, trajectory, last 90 days, mitigation, open matters</li><li>The same text goes into the PDF report for clients</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/fris/rankings.jpg"><img src="/assets/fris/rankings.jpg" alt="Entity risk rankings table" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">04 · BUILT FOR CLIENT WORK</div><h3>Rankings, watchlists, reports</h3><p>A multi-layer ranking across all entities, client watchlists, regional and asset-class filters, a top-movers view, PDF export, and sign-in so clients see only their own watchlist.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">By the numbers</div></div>
+      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>~220</b><span>asset managers and entities monitored</span></div><div class="stat rv d1"><b>8</b><span>data sources, from news to regulators' releases</span></div><div class="stat rv d2"><b>13</b><span>risk categories on a 20-point severity scale</span></div><div class="stat rv d3"><b>~7<small>h</small></b><span>fully automated weekly update, end to end</span></div></div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">How it was built</div><h2>Most of the work is<br><em>removing noise.</em></h2></div>
+      <div class="lessons"><div class="lesson rv"><b>Keep AI out of the arithmetic</b><p>The model classifies and explains; the score is a deterministic function of the classified record. That makes every rating reproducible and every change attributable.</p></div><div class="lesson rv d1"><b>Calibrate the judge against a gold set</b><p>A hand-labelled gold standard and regression runs check the classifier after every prompt or taxonomy change, so improvements are measured rather than assumed.</p></div><div class="lesson rv"><b>Design for the noise you actually see</b><p>Syndication, law-firm solicitations, parent and subsidiary confusion and multi-language duplicates each got a specific, tested rule.</p></div><div class="lesson rv d1"><b>Make it operable</b><p>One command runs the weekly update end to end, backs up the database and writes the change log, so the system does not depend on its author being there.</p></div></div>
+      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>A monitoring signal for analysts, not investment advice or a credit rating.</li><li>Coverage depends on what sources publish; paywalls limit full text for some articles.</li><li>The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed.</li></ul></div>
+    </div>
+  </section>
+
+  <a class="next wrap" href="/work/multifactor-scoring"><div class="eyebrow">Next case study</div><b>Multi-factor stock scoring <i aria-hidden="true">→</i></b></a>
+</main>
+
+<footer><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

@@ -117,9 +117,47 @@ def page(cs, nxt):
 
 MF = "/assets/multifactor"
 YRD = "/assets/yrd"
+FR = "/assets/fris"
 CASES = [
     dict(
-        slug="multifactor-scoring", eyebrow="Case study · 01 · Equity research tooling",
+        slug="fris", eyebrow="Case study · 01 · Risk intelligence platform",
+        title_plain="FRIS", title_html="FRIS <em>risk intelligence</em>",
+        summary="A risk-intelligence platform that monitors around 220 asset managers. It gathers news, regulatory releases and filings from eight sources, has an LLM classify every development into 13 risk categories on a 20-point scale, and turns them into a deterministic, explainable risk score for each entity.",
+        meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
+              ("Stack", "Python · FastAPI · PostgreSQL · LLM classification · Next.js · Recharts · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
+        frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4", poster=f"{FR}/poster.jpg",
+        video_label="71-second screen recording of FRIS running on fictional entities and synthetic data",
+        problem_h="Early warning, buried<br><em>in thousands of articles.</em>",
+        problem=["Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages.",
+                 "Most of it is noise. The same story is syndicated a dozen times, law-firm press releases make routine investigations sound alarming, and news about a parent company is not always news about its local subsidiary. A keyword alert drowns; a person cannot read it all.",
+                 "FRIS turns that stream into <b>one number per entity that an analyst can defend</b>: where it came from, which development set it, and what would bring it down."],
+        built_h="From raw news to a score<br><em>you can defend.</em>",
+        blocks=[
+            dict(img=f"{FR}/dashboard.jpg", alt="FRIS dashboard with AI briefing and latest risk events", k="01 · INGESTION AND DEDUPLICATION", h="Eight sources, one clean event stream",
+                 p="Collectors pull from news terminals, Google News, Yahoo Finance, SEC EDGAR and four regulators' releases. Full text is extracted where it can be, and duplicates are removed before anything is scored.",
+                 points=["Deduplication by URL, title similarity and content hash, then 7-day semantic clustering into incidents", "A representative article per incident, chosen by content and source authority", "Parent-to-subsidiary propagation that judges whether a parent's news really applies"]),
+            dict(img=f"{FR}/waterline.jpg", alt="Risk Score Waterline chart", k="02 · AI JUDGES, ARITHMETIC SCORES", h="The LLM classifies; it never sets the score",
+                 p="Each development is classified by an LLM into one of 13 categories on a 20-point scale, under explicit consistency rules. The entity's score is then pure arithmetic: the highest category, with cooling over time and credit for mitigations.",
+                 points=["Law-firm solicitation releases capped, a 33-firm blacklist, repeat alerts merged", "Category scores cool after 60 days, or 180 while a legal matter is pending", "The waterline shows every move, with one marker per assessed development"]),
+            dict(img=f"{FR}/analysis.jpg", alt="Radar of category scores and written risk analysis", k="03 · EXPLAINABLE BY CONSTRUCTION", h="Every rating explains itself",
+                 p="The category radar shows what is driving the score today. The written analysis is generated from the scorer's own record, not free-form text, so every sentence traces back to a scored development.",
+                 points=["Rating, risk profile, trajectory, last 90 days, mitigation, open matters", "The same text goes into the PDF report for clients"]),
+            dict(img=f"{FR}/rankings.jpg", alt="Entity risk rankings table", k="04 · BUILT FOR CLIENT WORK", h="Rankings, watchlists, reports",
+                 p="A multi-layer ranking across all entities, client watchlists, regional and asset-class filters, a top-movers view, PDF export, and sign-in so clients see only their own watchlist."),
+        ],
+        stats=[("~220", "asset managers and entities monitored"), ("8", "data sources, from news to regulators' releases"),
+               ("13", "risk categories on a 20-point severity scale"), ("~7<small>h</small>", "fully automated weekly update, end to end")],
+        lessons_h="Most of the work is<br><em>removing noise.</em>",
+        lessons=[("Keep AI out of the arithmetic", "The model classifies and explains; the score is a deterministic function of the classified record. That makes every rating reproducible and every change attributable."),
+                 ("Calibrate the judge against a gold set", "A hand-labelled gold standard and regression runs check the classifier after every prompt or taxonomy change, so improvements are measured rather than assumed."),
+                 ("Design for the noise you actually see", "Syndication, law-firm solicitations, parent and subsidiary confusion and multi-language duplicates each got a specific, tested rule."),
+                 ("Make it operable", "One command runs the weekly update end to end, backs up the database and writes the change log, so the system does not depend on its author being there.")],
+        limits=["A monitoring signal for analysts, not investment advice or a credit rating.",
+                "Coverage depends on what sources publish; paywalls limit full text for some articles.",
+                "The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed."],
+    ),
+    dict(
+        slug="multifactor-scoring", eyebrow="Case study · 02 · Equity research tooling",
         title_plain="Multi-factor stock scoring", title_html="Multi-factor<br><em>stock scoring</em>",
         summary="A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.",
         meta=[("Role", "Sole developer: design, backend, frontend, tests"), ("Year", "2026"), ("Stack", "Python · FastAPI · NumPy · SQLite · vanilla JS"), ("Status", "Working tool; private repository, source on request")],
@@ -154,7 +192,7 @@ CASES = [
                 "Demo data is synthetic: 200 sample companies across 10 industries."],
     ),
     dict(
-        slug="yrd-assistant", eyebrow="Case study · 02 · Workflow automation",
+        slug="yrd-assistant", eyebrow="Case study · 03 · Workflow automation",
         title_plain="YRD Assistant", title_html="YRD <em>Assistant</em>",
         summary="A desktop assistant that runs a financial publisher's daily report workflow: it finds the morning market commentary in Outlook, writes each section into the right WordPress draft, and drafts the confirmation email, while a person stays in charge of publishing.",
         meta=[("Role", "Sole developer, built for an employer"), ("Timeline", "March to May 2026"), ("Stack", "Node.js · Electron · Python · Outlook COM · WordPress REST API"), ("Status", "Delivered; private repository")],
