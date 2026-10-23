@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bingcheng Liu — Software, AI & Data</title>
-<meta name="description" content="Bingcheng Liu builds software, AI and data systems for finance and beyond. Selected work, with real product walkthroughs.">
+<title>Bingcheng Liu — Full-stack, AI Agents & Finance</title>
+<meta name="description" content="Bingcheng Liu takes ideas to production: full-stack products, AI agent systems, data platforms and quantitative tools. Selected work, with real product walkthroughs.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#050b1a">
 <meta property="og:title" content="Bingcheng Liu — Software, AI & Data">
-<meta property="og:description" content="Selected software, AI and data projects, with real product walkthroughs.">
+<meta property="og:description" content="Full-stack, AI agent and data projects taken to production, with real product walkthroughs.">
 <meta property="og:image" content="/assets/multifactor/poster.jpg">
 <style>
 :root{
@@ -49,8 +49,11 @@ img,video{display:block;max-width:100%}
 .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.42em);animation:rise 1.1s cubic-bezier(.2,.75,.2,1) forwards}
 .hero h1 .accent{color:var(--accent);font-style:italic}
 @keyframes rise{to{opacity:1;transform:none}}
-.lede{max-width:600px;font-size:clamp(17px,1.6vw,21px);color:var(--muted);opacity:0;animation:fade 1.2s .9s forwards}
+.roles{list-style:none;padding:0;margin:-6px 0 30px;display:flex;flex-wrap:wrap;gap:10px;opacity:0;animation:fade 1.2s .7s forwards}
+.roles li{font-size:13px;letter-spacing:.02em;color:var(--ink);border:1px solid var(--line);background:rgba(140,194,255,.06);padding:7px 14px;border-radius:999px}
+.lede{max-width:640px;font-size:clamp(17px,1.6vw,21px);color:var(--muted);opacity:0;animation:fade 1.2s .9s forwards}
 @keyframes fade{to{opacity:1}}
+@media (max-width:640px){.scroll-cue{display:none}}
 .cta{display:flex;gap:14px;margin-top:40px;opacity:0;animation:fade 1.2s 1.15s forwards;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.01em;transition:transform .25s,background .25s,color .25s,border-color .25s}
 .btn.solid{background:var(--ink);color:var(--bg)}.btn.solid:hover{background:var(--accent);transform:translateY(-2px)}
@@ -160,7 +163,7 @@ footer{border-top:1px solid var(--line)}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .hero h1 .w,.lede,.cta{animation:none;opacity:1;transform:none}
+  .hero h1 .w,.roles,.lede,.cta{animation:none;opacity:1;transform:none}
   .rv,.frame.rv{opacity:1;transform:none;translate:none;transition:none}
   .marquee-track,.scroll-cue i{animation:none}
 }
@@ -187,8 +190,9 @@ footer{border-top:1px solid var(--line)}
     <canvas id="flow" aria-hidden="true"></canvas>
     <div class="hero-in">
       <div class="eyebrow">Bingcheng Liu · 刘冰骋</div>
-      <h1 id="hero-title"><span class="w" style="animation-delay:.05s">Ideas</span> <span class="w" style="animation-delay:.17s">into</span><br><span class="w accent" style="animation-delay:.32s">working</span> <span class="w accent" style="animation-delay:.44s">software.</span></h1>
-      <p class="lede">I build software, AI and data systems with a focus on finance, from data pipelines and models to tools people actually use, verified to production standards.</p>
+      <h1 id="hero-title"><span class="w" style="animation-delay:.05s">From</span> <span class="w" style="animation-delay:.17s">idea</span><br><span class="w accent" style="animation-delay:.32s">to</span> <span class="w accent" style="animation-delay:.44s">production.</span></h1>
+      <ul class="roles" aria-label="Focus areas"><li>Full-stack engineering</li><li>AI agent systems</li><li>Forward-deployed engineering</li><li>Data platforms</li><li>Quantitative finance</li></ul>
+      <p class="lede">I build production-grade systems end to end: full-stack products, multi-agent AI workflows, data platforms and research tools. I work close to the people who use them, and every system ships with tests, evidence and a clear statement of its limits.</p>
       <div class="cta">
         <a class="btn solid" href="#work">See featured work <span aria-hidden="true">↓</span></a>
         <a class="btn ghost" href="https://github.com/bensonliu-sudo">GitHub <span aria-hidden="true">↗</span></a>
@@ -198,8 +202,8 @@ footer{border-top:1px solid var(--line)}
   </section>
 
   <div class="marquee" aria-hidden="true"><div class="marquee-track">
-    <span>Quantitative research</span><span>Data pipelines</span><span>Python · FastAPI · NumPy</span><span>Machine learning</span><span>NLP & Transformers</span><span>Computer vision</span><span>Trading systems</span><span>Smart contracts</span>
-    <span>Quantitative research</span><span>Data pipelines</span><span>Python · FastAPI · NumPy</span><span>Machine learning</span><span>NLP & Transformers</span><span>Computer vision</span><span>Trading systems</span><span>Smart contracts</span>
+    <span>AI agent systems</span><span>Full-stack apps</span><span>LLM workflows</span><span>Data platforms</span><span>Quantitative research</span><span>Trading systems</span><span>Python · FastAPI · SQL</span><span>Machine learning & NLP</span><span>Computer vision</span><span>Smart contracts</span>
+    <span>AI agent systems</span><span>Full-stack apps</span><span>LLM workflows</span><span>Data platforms</span><span>Quantitative research</span><span>Trading systems</span><span>Python · FastAPI · SQL</span><span>Machine learning & NLP</span><span>Computer vision</span><span>Smart contracts</span>
   </div></div>
 
   <section id="work" aria-labelledby="work-title">
@@ -283,7 +287,7 @@ footer{border-top:1px solid var(--line)}
     <div class="wrap about">
       <div class="rv"><div class="eyebrow">About</div><h2 id="about-title">Bingcheng<br>Liu</h2></div>
       <div class="rv d1">
-        <p>I work across software, AI and data, and I am most at home where they meet finance: research tooling, data pipelines, models and the systems that put them to work.</p>
+        <p>I work across the stack, from data ingestion and models to APIs, interfaces and the agents that tie them together. Finance is where I go deepest, but the same approach carries to any domain where results have to hold up in production.</p>
         <p>I care about results that can be reproduced and explained, which is why the projects here come with tests, evidence and a clear statement of their limits.</p>
         <a class="btn ghost" href="https://github.com/bensonliu-sudo">Find me on GitHub <span aria-hidden="true">↗</span></a>
       </div>
@@ -291,7 +295,7 @@ footer{border-top:1px solid var(--line)}
   </section>
 </main>
 
-<footer><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Software · AI · Data</span></div></footer>
+<footer><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
 
 <script>
 (() => {
