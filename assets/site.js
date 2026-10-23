@@ -36,7 +36,7 @@
     document.querySelectorAll('video[data-auto]').forEach((v) => vo.observe(v));
   }
 
-  // contact form: posts to Web3Forms, which forwards the message to the owner's inbox
+  // contact form: posts to /api/contact, which forwards the message to the owner's inbox
   const form = document.getElementById('contact-form');
   if (form) {
     const status = form.querySelector('.form-status'), button = form.querySelector('button');
@@ -44,15 +44,13 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { say('Please fill in your name, a valid email and a message.', 'err'); return; }
-      if (!form.dataset.key) { say('The form is not connected yet. Please try again soon.', 'err'); return; }
       const data = Object.fromEntries(new FormData(form));
       if (data.botcheck) return;
       button.disabled = true; say('Sending…');
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/api/contact', {
           method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ access_key: form.dataset.key, subject: 'New message from bingchengliu.com', from_name: 'bingchengliu.com',
-            name: data.name, email: data.email, company: data.company || '-', message: data.message, botcheck: '' }),
+          body: JSON.stringify({ name: data.name, email: data.email, company: data.company, message: data.message, botcheck: '' }),
         });
         const out = await res.json().catch(() => ({}));
         if (res.ok && out.success) { form.reset(); say('Thank you. Your message is on its way, and I will get back to you soon.', 'ok'); }
