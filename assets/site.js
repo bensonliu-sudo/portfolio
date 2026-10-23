@@ -36,7 +36,8 @@
     document.querySelectorAll('video[data-auto]').forEach((v) => vo.observe(v));
   }
 
-  // contact form: posts to /api/contact, which forwards the message to the owner's inbox
+  // contact form: the browser posts to Web3Forms (its free plan only accepts browser submissions);
+  // the access key comes from /api/contact, which reads it from the Vercel environment
   const form = document.getElementById('contact-form');
   if (form) {
     const status = form.querySelector('.form-status'), button = form.querySelector('button');
@@ -48,9 +49,13 @@
       if (data.botcheck) return;
       button.disabled = true; say('Sending…');
       try {
-        const res = await fetch('/api/contact', {
+        const cfg = await fetch('/api/contact', { cache: 'no-store' }).then((r) => r.json()).catch(() => ({}));
+        if (!cfg.key) { say('The form is not available right now. Please try again later.', 'err'); button.disabled = false; return; }
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ name: data.name, email: data.email, company: data.company, message: data.message, botcheck: '' }),
+          body: JSON.stringify({ access_key: cfg.key, subject: 'New message from bingchengliu.com', from_name: 'bingchengliu.com',
+            name: data.name.slice(0, 100), email: data.email.slice(0, 200), replyto: data.email.slice(0, 200),
+            company: (data.company || '-').slice(0, 120), message: data.message.slice(0, 4000), botcheck: '' }),
         });
         const out = await res.json().catch(() => ({}));
         if (res.ok && out.success) { form.reset(); say('Thank you. Your message is on its way, and I will get back to you soon.', 'ok'); }
