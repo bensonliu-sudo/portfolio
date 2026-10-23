@@ -13,7 +13,8 @@ NAV = """<header class="nav theme-dark" id="nav">
       <a href="/#approach" class="hide-s">Approach</a>
       <a href="/#more">Projects</a>
       <a href="/#about" class="hide-s">About</a>
-      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+      <a href="/#contact">Contact</a>
+      <a href="https://github.com/bensonliu-sudo" class="hide-s">GitHub ↗</a>
     </nav>
   </div>
 </header>"""
