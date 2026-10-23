@@ -13,7 +13,8 @@ NAV = """<header class="nav theme-dark" id="nav">
       <a href="/#approach" class="hide-s">Approach</a>
       <a href="/#more">Projects</a>
       <a href="/#about" class="hide-s">About</a>
-      <a href="https://github.com/bensonliu-sudo">GitHub ↗</a>
+      <a href="/#contact">Contact</a>
+      <a href="https://github.com/bensonliu-sudo" class="hide-s">GitHub ↗</a>
     </nav>
   </div>
 </header>"""
@@ -60,7 +61,7 @@ def page(cs, nxt):
 <meta property="og:title" content="{cs["title_plain"]} — Bingcheng Liu">
 <meta property="og:description" content="{escape(cs["summary"])}">
 <meta property="og:image" content="{cs["poster"]}">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20261024b">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -116,7 +117,7 @@ def page(cs, nxt):
 </main>
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
-<script src="/assets/site.js"></script>
+<script src="/assets/site.js?v=20261024b"></script>
 </body>
 </html>
 '''
@@ -157,9 +158,9 @@ CASES = [
         stats=[("288,534", "articles collected since launch"), ("114,810", "events classified by the LLM after deduplication"),
                ("9,485", "incidents clustered from those events"), ("220", "asset managers and entities monitored")],
         stats_note="Cumulative, as of the weekly run of 18 October 2026.",
-        stats2=[("~1,960", "new articles in a typical week, from 7 collectors"), ("1.5<small>%</small>", "of them are genuine risk developments; 88% are irrelevant"),
+        stats2=[("~1,960", "new articles in the week of 12–18 October 2026, from 7 collectors"), ("1.5<small>%</small>", "of them classified as risk-relevant by the model; 88% as irrelevant"),
                 ("2<small>h</small> 46<small>m</small>", "for the whole weekly pipeline, collection to scoring"), ("100<small>%</small>", "of events classified successfully that week")],
-        stats2_note="A typical week: 12 to 18 October 2026.",
+        stats2_note="One week: 12 to 18 October 2026.",
         stats3=[("6", "quality agents, each owning one stage of the pipeline"), ("3", "models from three vendors on every disputed verdict"),
                 ("87<small>%</small>", "of agent corrections upheld by independent adjudication"), ("97.9<small>%</small>", "verdict stability: 1,036 articles judged twice")],
         stats3_note="Quality layer, first production run on 12 October 2026.",

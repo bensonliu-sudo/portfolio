@@ -36,6 +36,35 @@
     document.querySelectorAll('video[data-auto]').forEach((v) => vo.observe(v));
   }
 
+  // contact form: the browser posts to Web3Forms (its free plan only accepts browser submissions);
+  // the access key comes from /api/contact, which reads it from the Vercel environment
+  const form = document.getElementById('contact-form');
+  if (form) {
+    const status = form.querySelector('.form-status'), button = form.querySelector('button');
+    const say = (msg, cls) => { status.textContent = msg; status.className = 'form-status' + (cls ? ' ' + cls : ''); };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { say('Please fill in your name, a valid email and a message.', 'err'); return; }
+      const data = Object.fromEntries(new FormData(form));
+      if (data.botcheck) return;
+      button.disabled = true; say('Sending…');
+      try {
+        const cfg = await fetch('/api/contact', { cache: 'no-store' }).then((r) => r.json()).catch(() => ({}));
+        if (!cfg.key) { say('The form is not available right now. Please try again later.', 'err'); button.disabled = false; return; }
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ access_key: cfg.key, subject: 'New message from bingchengliu.com', from_name: 'bingchengliu.com',
+            name: data.name.slice(0, 100), email: data.email.slice(0, 200), replyto: data.email.slice(0, 200),
+            company: (data.company || '-').slice(0, 120), message: data.message.slice(0, 4000), botcheck: '' }),
+        });
+        const out = await res.json().catch(() => ({}));
+        if (res.ok && out.success) { form.reset(); say('Thank you. Your message is on its way, and I will get back to you soon.', 'ok'); }
+        else say('Something went wrong. Please try again in a moment.', 'err');
+      } catch { say('Could not reach the server. Please check your connection and try again.', 'err'); }
+      button.disabled = false;
+    });
+  }
+
   // spotlight following the pointer on approach cards
   document.querySelectorAll('.step').forEach((el) => el.addEventListener('pointermove', (e) => {
     const r = el.getBoundingClientRect(); el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
