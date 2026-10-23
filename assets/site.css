@@ -1,9 +1,9 @@
 :root{
-  /* light paper theme (default) */
-  --bg:#f6f4ef;--bg2:#eeebe3;--panel:#ffffff;--ink:#111a2e;--text-2:#2b3550;--muted:#4f5a70;--faint:#858fa3;
-  --line:rgba(17,26,46,.12);--line-strong:rgba(42,91,215,.4);--accent:#2a5bd7;--accent-2:#5b8cff;
-  --card:rgba(255,255,255,.72);--card-hover:#ffffff;--frame-bg:#ffffff;--frame-bar:#ebe8e1;
-  --frame-shadow:0 40px 90px -42px rgba(17,26,46,.38),0 2px 6px rgba(17,26,46,.05);--nav-bg:rgba(246,244,239,.84);
+  /* cool grey theme (default): between the light product screenshots and the dark bands */
+  --bg:#d3d8df;--bg2:#c8ced7;--panel:#ffffff;--ink:#111a2e;--text-2:#2b3550;--muted:#4f5a70;--faint:#858fa3;
+  --line:rgba(17,26,46,.15);--line-strong:rgba(42,91,215,.45);--accent:#2a5bd7;--accent-2:#5b8cff;
+  --card:rgba(255,255,255,.45);--card-hover:rgba(255,255,255,.8);--frame-bg:#ffffff;--frame-bar:#c3c9d2;
+  --frame-shadow:0 40px 90px -42px rgba(17,26,46,.38),0 2px 6px rgba(17,26,46,.05);--nav-bg:rgba(211,216,223,.86);
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
