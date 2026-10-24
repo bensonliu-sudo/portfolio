@@ -65,6 +65,23 @@
     });
   }
 
+  // ---------- return to where the reader left the homepage ----------
+  try {
+    if (location.pathname === '/' || location.pathname === '/index.html') {
+      document.querySelectorAll('a[href^="/work/"]').forEach((a) => a.addEventListener('click', () => sessionStorage.setItem('homeY', String(scrollY))));
+      if (sessionStorage.getItem('restoreHome')) {
+        const y = sessionStorage.getItem('homeY');
+        sessionStorage.removeItem('restoreHome');
+        if (y !== null) requestAnimationFrame(() => scrollTo({ top: +y, behavior: 'instant' }));   // no saved spot: the #work anchor applies
+      }
+    }
+    document.querySelectorAll('[data-home]').forEach((a) => a.addEventListener('click', (e) => {
+      const ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref && ref.origin === location.origin && (ref.pathname === '/' || ref.pathname === '/index.html') && history.length > 1) { e.preventDefault(); history.back(); return; }
+      sessionStorage.setItem('restoreHome', '1');
+    }));
+  } catch (_) { /* storage unavailable: plain links still work */ }
+
   // ---------- motion layer ----------
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   // scroll progress

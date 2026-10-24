@@ -32,6 +32,8 @@ def frame(cs):
 
 
 def page(cs, nxt):
+    nxt_link = (f'<a class="next wrap" href="/work/{nxt["slug"]}"><div class="eyebrow">Next case study</div><b>{nxt["title_plain"]} <i aria-hidden="true">→</i></b></a>'
+                if nxt else '<a class="next wrap" href="/#work" data-home><div class="eyebrow">That was the last one</div><b>Back to all work <i aria-hidden="true">↩</i></b></a>')
     meta = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in cs["meta"])
     blocks = []
     for i, b in enumerate(cs["blocks"]):
@@ -61,7 +63,7 @@ def page(cs, nxt):
 <meta property="og:title" content="{cs["title_plain"]} — Bingcheng Liu">
 <meta property="og:description" content="{escape(cs["summary"])}">
 <meta property="og:image" content="{cs["poster"]}">
-<link rel="stylesheet" href="/assets/site.css?v=20261024l">
+<link rel="stylesheet" href="/assets/site.css?v=20261024n">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -70,7 +72,7 @@ def page(cs, nxt):
 <main id="main">
   <section class="cs-hero theme-dark">
     <div class="wrap">
-      <a class="back" href="/#work"><span aria-hidden="true">←</span> All work</a>
+      <a class="back" href="/#work" data-home><span aria-hidden="true">←</span> All work</a>
       <div class="eyebrow">{cs["eyebrow"]}</div>
       <h1>{cs["title_html"]}</h1>
       <p class="lede">{cs["summary"]}</p>
@@ -113,11 +115,11 @@ def page(cs, nxt):
     </div>
   </section>
 
-  <a class="next wrap" href="/work/{nxt["slug"]}"><div class="eyebrow">Next case study</div><b>{nxt["title_plain"]} <i aria-hidden="true">→</i></b></a>
+  {nxt_link}
 </main>
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
-<script src="/assets/site.js?v=20261024l"></script>
+<script src="/assets/site.js?v=20261024n"></script>
 </body>
 </html>
 '''
@@ -249,5 +251,5 @@ CASES = [
 for i, cs in enumerate(CASES):
     out = ROOT / "work" / cs["slug"] / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(page(cs, CASES[(i + 1) % len(CASES)]))
+    out.write_text(page(cs, CASES[i + 1] if i + 1 < len(CASES) else None))
     print("wrote", out.relative_to(ROOT))
