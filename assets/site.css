@@ -352,6 +352,7 @@ em,.hero h1 .accent{background:linear-gradient(100deg,var(--accent) 20%,#5fd3f3 
 .prow .mini{margin:clamp(14px,2.6vh,26px) 0 clamp(14px,2.6vh,24px);padding-top:clamp(12px,2.2vh,22px)}
 .prow .frame{max-height:min(62vh,520px)}
 .prow .frame video{max-height:calc(min(62vh,520px) - 40px)}
-html{scroll-snap-type:y proximity}
-.hero,#work,.prow + .prow,#approach,#more,#about,#contact{scroll-snap-align:start}
-@media(max-width:980px){.prow + .prow{min-height:auto;padding:60px 0}html{scroll-snap-type:none}}
+@media(max-width:980px){.prow + .prow{min-height:auto;padding:60px 0}}
+
+/* case-study walkthrough fits one screen: width capped by viewport height (16:10 video + 40px bar) */
+.cs-video .frame{max-width:min(100%,calc((100svh - 150px) * 1.6));margin:0 auto}
