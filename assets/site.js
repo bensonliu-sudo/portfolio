@@ -32,7 +32,11 @@
 
   // walkthrough videos: play only while on screen
   if (!reduce) {
-    const vo = new IntersectionObserver((entries) => entries.forEach((e) => { e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause(); }), { threshold: 0.35 });
+    // a video inside a frame that has not made its entrance yet waits; the entrance starts it from the first frame
+    const vo = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const w = e.target.closest('.wipe');
+      if (e.isIntersecting && (!w || w.classList.contains('in'))) e.target.play().catch(() => {}); else e.target.pause();
+    }), { threshold: 0.35 });
     document.querySelectorAll('video[data-auto]').forEach((v) => vo.observe(v));
   }
 
@@ -123,7 +127,11 @@
         // start once about 90% of the frame is on screen, so the reader sees the whole entrance
         const r = wipes[i].getBoundingClientRect();
         const seen = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
-        if (seen >= Math.min(r.height * 0.9, innerHeight * 0.8)) { wipes[i].classList.add('in'); wipes.splice(i, 1); }
+        if (seen >= Math.min(r.height * 0.9, innerHeight * 0.8)) {
+          const v = wipes[i].querySelector('video');
+          if (v) { try { v.currentTime = 0; } catch (_) {} v.play().catch(() => {}); }
+          wipes[i].classList.add('in'); wipes.splice(i, 1);
+        }
       }
     };
     addEventListener('scroll', wipeCheck, { passive: true }); addEventListener('resize', wipeCheck); wipeCheck();

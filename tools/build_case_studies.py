@@ -63,7 +63,7 @@ def page(cs, nxt):
 <meta property="og:title" content="{cs["title_plain"]} — Bingcheng Liu">
 <meta property="og:description" content="{escape(cs["summary"])}">
 <meta property="og:image" content="{cs["poster"]}">
-<link rel="stylesheet" href="/assets/site.css?v=20261024q">
+<link rel="stylesheet" href="/assets/site.css?v=20261024r">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -119,7 +119,7 @@ def page(cs, nxt):
 </main>
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
-<script src="/assets/site.js?v=20261024q"></script>
+<script src="/assets/site.js?v=20261024r"></script>
 </body>
 </html>
 '''
@@ -135,7 +135,7 @@ CASES = [
         summary="FRIS is an enterprise platform that monitors reputational and governance risk at 220 fund managers for due-diligence and investment teams. Every week it reads the news and regulatory releases about each manager, scores every development on a 20-point scale, and shows who is getting riskier, and why. An LLM judges each article, a multi-agent quality layer checks those judgements stage by stage, and deterministic rules turn them into a score an analyst can defend.",
         meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, agents, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
               ("Stack", "Python · LangGraph · FastAPI · PostgreSQL · Next.js · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
-        frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4", poster=f"{FR}/poster.jpg",
+        frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4?v=2", poster=f"{FR}/poster.jpg?v=2",
         video_label="71-second screen recording of FRIS running on fictional entities and synthetic data",
         problem_h="Early warning, buried<br><em>in thousands of articles.</em>",
         problem=["Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages, and most of them are noise.",
@@ -182,7 +182,7 @@ CASES = [
         title_plain="Multi-factor stock scoring", title_html="Multi-factor<br><em>stock scoring</em>",
         summary="A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.",
         meta=[("Role", "Sole developer: design, backend, frontend, tests"), ("Year", "2026"), ("Stack", "Python · FastAPI · NumPy · SQLite · vanilla JS"), ("Status", "Working tool; private repository, source on request")],
-        frame="browser", frame_label="multi-factor-scoring · live walkthrough", video=f"{MF}/demo.mp4", poster=f"{MF}/poster.jpg",
+        frame="browser", frame_label="multi-factor-scoring · live walkthrough", video=f"{MF}/demo.mp4?v=2", poster=f"{MF}/poster.jpg?v=2",
         video_label="37-second screen recording of the multi-factor scoring tool on synthetic data",
         problem_h="Pools built by hand,<br><em>hard to explain.</em>",
         problem=["Research teams often build their candidate pools in spreadsheets: standardise a handful of factors, weight them, sort, take the top N. It works until someone asks <b>why a stock is in the pool</b>, or what changed since last week.",
@@ -217,7 +217,7 @@ CASES = [
         title_plain="YRD Assistant", title_html="YRD <em>Assistant</em>",
         summary="A desktop assistant that runs a financial publisher's daily report workflow: it finds the morning market commentary in Outlook, writes each section into the right WordPress draft, and drafts the confirmation email, while a person stays in charge of publishing.",
         meta=[("Role", "Sole developer, built for an employer"), ("Timeline", "March to May 2026"), ("Stack", "Node.js · Electron · Python · Outlook COM · WordPress REST API"), ("Status", "Delivered; private repository")],
-        frame="win", frame_label="YRD Assistant · desktop app", video=f"{YRD}/demo.mp4", poster=f"{YRD}/poster.jpg",
+        frame="win", frame_label="YRD Assistant · desktop app", video=f"{YRD}/demo.mp4?v=2", poster=f"{YRD}/poster.jpg?v=2",
         video_label="46-second screen recording of YRD Assistant running on synthetic content",
         problem_h="A daily copy-paste job<br><em>that had to be perfect.</em>",
         problem=["Every business day the publisher releases a bonds report and an equities report. The market commentary arrives by email in the morning, and someone has to copy <b>four sections into two WordPress drafts</b>, each under exactly the right heading, without disturbing the charts, tables and ads around them.",
