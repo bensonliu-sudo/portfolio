@@ -63,7 +63,7 @@ def page(cs, nxt):
 <meta property="og:title" content="{cs["title_plain"]} — Bingcheng Liu">
 <meta property="og:description" content="{escape(cs["summary"])}">
 <meta property="og:image" content="{cs["poster"]}">
-<link rel="stylesheet" href="/assets/site.css?v=20261024n">
+<link rel="stylesheet" href="/assets/site.css?v=20261024o">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -119,7 +119,7 @@ def page(cs, nxt):
 </main>
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
-<script src="/assets/site.js?v=20261024n"></script>
+<script src="/assets/site.js?v=20261024o"></script>
 </body>
 </html>
 '''

@@ -371,3 +371,25 @@ body::after{width:58vw;height:58vw;right:-16vw;bottom:-18vh;
 .block{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}
 .block .shot{max-width:540px;justify-self:center;width:100%}
 .block .shot img{aspect-ratio:auto;object-fit:contain;background:#fff}
+
+/* case-study header fits one screen */
+.cs-hero{padding:clamp(96px,13vh,150px) 0 clamp(36px,6vh,80px)}
+.back{margin-bottom:clamp(14px,3vh,40px)}
+.cs-hero h1{font-size:min(6.2vw,92px,10.5vh);margin:clamp(12px,2.4vh,26px) 0 clamp(12px,2.4vh,26px)}
+.cs-hero .lede{font-size:clamp(15px,min(1.4vw,2.3vh),19px)}
+.cs-meta{margin-top:clamp(18px,3.6vh,56px)}
+.cs-meta div{padding-top:clamp(10px,1.8vh,20px)}
+.cs-meta dd{font-size:13px}
+
+/* FRIS: venetian blinds, each slat opens from thin to full */
+@property --slat{syntax:'<percentage>';inherits:false;initial-value:0%}
+.wipe.wipe-v{clip-path:none;--slat:0%;
+  -webkit-mask-image:repeating-linear-gradient(to bottom,#000 0 var(--slat),transparent var(--slat) 7.69%);
+  mask-image:repeating-linear-gradient(to bottom,#000 0 var(--slat),transparent var(--slat) 7.69%);
+  transition:--slat 1.4s cubic-bezier(.65,0,.25,1)}
+.wipe.wipe-v.in{--slat:7.7%}
+.wipe.wipe-v.done{-webkit-mask-image:none;mask-image:none}
+/* case-study walkthrough: focus pull (slight zoom and blur settling into place) */
+.wipe.wipe-z{clip-path:none;opacity:0;transform:scale(1.06);filter:blur(14px);
+  transition:opacity 1.2s cubic-bezier(.2,.75,.2,1),transform 1.6s cubic-bezier(.2,.75,.2,1),filter 1.4s cubic-bezier(.2,.75,.2,1)}
+.wipe.wipe-z.in{opacity:1;transform:none;filter:none}

@@ -111,7 +111,10 @@
     document.querySelectorAll('.prow .frame, .block .shot, .cs-video .frame').forEach((f) => {
       // observe the container: a fully clipped element never reports as intersecting
       f.classList.remove('rv'); f.classList.add('wipe');
-      if (f.closest('.prow')) f.classList.add(['wipe-c', 'wipe-s', 'wipe-d'][[...document.querySelectorAll('.prow')].indexOf(f.closest('.prow')) % 3]);
+      if (f.closest('.prow')) f.classList.add(['wipe-v', 'wipe-s', 'wipe-d'][[...document.querySelectorAll('.prow')].indexOf(f.closest('.prow')) % 3]);
+      if (f.closest('.cs-video')) f.classList.add('wipe-z');
+      // after the blinds open, drop the mask so the frame renders crisply
+      if (f.classList.contains('wipe-v')) f.addEventListener('transitionend', () => f.classList.add('done'), { once: true });
       wipes.push(f);
     });
     // trigger on the frame's own position (getBoundingClientRect ignores clip-path), so each video animates where the reader can see it
