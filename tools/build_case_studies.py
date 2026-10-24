@@ -61,7 +61,7 @@ def page(cs, nxt):
 <meta property="og:title" content="{cs["title_plain"]} — Bingcheng Liu">
 <meta property="og:description" content="{escape(cs["summary"])}">
 <meta property="og:image" content="{cs["poster"]}">
-<link rel="stylesheet" href="/assets/site.css?v=20261024b">
+<link rel="stylesheet" href="/assets/site.css?v=20261024f">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -117,7 +117,7 @@ def page(cs, nxt):
 </main>
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
-<script src="/assets/site.js?v=20261024b"></script>
+<script src="/assets/site.js?v=20261024f"></script>
 </body>
 </html>
 '''
@@ -128,9 +128,9 @@ YRD = "/assets/yrd"
 FR = "/assets/fris"
 CASES = [
     dict(
-        slug="fris", eyebrow="Case study · 01 · Multi-agent risk intelligence",
-        title_plain="FRIS", title_html="FRIS <em>multi-agent risk intelligence</em>",
-        summary="A multi-agent risk-intelligence system that tracks 220 asset managers. A deterministic workflow collects news and regulators' releases, an LLM judges every development against an in-house risk framework, and a multi-agent quality layer inspects and corrects those judgements stage by stage, before a rules engine turns them into one explainable score per entity.",
+        slug="fris", eyebrow="Case study · 01 · Reputational and governance risk monitoring",
+        title_plain="FRIS", title_html="FRIS <em>fund manager risk monitoring</em>",
+        summary="FRIS monitors reputational and governance risk at 220 fund managers for due-diligence and investment teams. Every week it reads the news and regulatory releases about each manager, scores every development on a 20-point scale, and shows who is getting riskier, and why. An LLM judges each article, a multi-agent quality layer checks those judgements stage by stage, and deterministic rules turn them into a score an analyst can defend.",
         meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, agents, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
               ("Stack", "Python · LangGraph · FastAPI · PostgreSQL · Next.js · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
         frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4", poster=f"{FR}/poster.jpg",

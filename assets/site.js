@@ -65,6 +65,66 @@
     });
   }
 
+  // ---------- motion layer ----------
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // scroll progress
+  const bar = document.createElement('div'); bar.className = 'progress'; document.body.appendChild(bar);
+  const prog = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`; };
+  addEventListener('scroll', prog, { passive: true }); prog();
+  if (!reduce) {
+    // headings rise word by word
+    document.querySelectorAll('.sec-head h2, .cs-sec h2, .contact h2, .about h2, .next b').forEach((h) => {
+      const walk = (node) => [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((w) => {
+            if (!w.trim()) { frag.appendChild(document.createTextNode(w)); return; }
+            const s = document.createElement('span'); s.className = 'wd'; s.textContent = w; frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+      });
+      walk(h); h.classList.add('split');
+      h.querySelectorAll('.wd').forEach((w, i) => { w.style.transitionDelay = (i * 0.06) + 's'; });
+      const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) { h.classList.add('in'); o.disconnect(); } }, { threshold: 0.3 });
+      o.observe(h);
+    });
+    // screenshots wipe in
+    document.querySelectorAll('.prow .frame, .block .shot, .cs-video .frame').forEach((f) => {
+      // observe the container: a fully clipped element never reports as intersecting
+      f.classList.remove('rv'); f.classList.add('wipe');
+      const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) { f.classList.add('in'); o.disconnect(); } }, { threshold: 0.12 });
+      o.observe(f.parentElement);
+    });
+    // gentle parallax: frames drift against the text column
+    const par = [...document.querySelectorAll('.prow .frame, .block .shot')];
+    const para = () => par.forEach((el) => { const r = el.getBoundingClientRect(); const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      el.style.translate = `0 ${(-c * 28).toFixed(1)}px`; });
+    addEventListener('scroll', para, { passive: true }); para();
+  }
+  if (fine && !reduce) {
+    // glass sheen follows the pointer; cards tilt toward it
+    document.querySelectorAll('.prow, .card, .lesson, .step, .contact-form, .stat').forEach((el) => {
+      el.classList.add('sheen');
+      el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect();
+        el.style.setProperty('--sx', (e.clientX - r.left) + 'px'); el.style.setProperty('--sy', (e.clientY - r.top) + 'px'); });
+    });
+    document.querySelectorAll('.card, .lesson, .step').forEach((el) => {
+      el.classList.add('tilt');
+      el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateY(-4px)`; });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+    // magnetic buttons
+    document.querySelectorAll('.btn, .more-link').forEach((el) => {
+      el.classList.add('magnet');
+      el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect();
+        el.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * 0.25).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * 0.35).toFixed(1)}px)`; });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
   // spotlight following the pointer on approach cards
   document.querySelectorAll('.step').forEach((el) => el.addEventListener('pointermove', (e) => {
     const r = el.getBoundingClientRect(); el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
