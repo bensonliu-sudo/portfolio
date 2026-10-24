@@ -32,7 +32,11 @@
 
   // walkthrough videos: play only while on screen
   if (!reduce) {
-    const vo = new IntersectionObserver((entries) => entries.forEach((e) => { e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause(); }), { threshold: 0.35 });
+    // a video inside a frame that has not made its entrance yet waits; the entrance starts it from the first frame
+    const vo = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const w = e.target.closest('.wipe');
+      if (e.isIntersecting && (!w || w.classList.contains('in'))) e.target.play().catch(() => {}); else e.target.pause();
+    }), { threshold: 0.35 });
     document.querySelectorAll('video[data-auto]').forEach((v) => vo.observe(v));
   }
 
@@ -62,6 +66,112 @@
         else say('Something went wrong. Please try again in a moment.', 'err');
       } catch { say('Could not reach the server. Please check your connection and try again.', 'err'); }
       button.disabled = false;
+    });
+  }
+
+  // ---------- return to where the reader left the homepage ----------
+  try {
+    if (location.pathname === '/' || location.pathname === '/index.html') {
+      document.querySelectorAll('a[href^="/work/"]').forEach((a) => a.addEventListener('click', () => sessionStorage.setItem('homeY', String(scrollY))));
+      if (sessionStorage.getItem('restoreHome')) {
+        const y = sessionStorage.getItem('homeY');
+        sessionStorage.removeItem('restoreHome');
+        if (y !== null) requestAnimationFrame(() => scrollTo({ top: +y, behavior: 'instant' }));   // no saved spot: the #work anchor applies
+      }
+    }
+    document.querySelectorAll('[data-home]').forEach((a) => a.addEventListener('click', (e) => {
+      const ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref && ref.origin === location.origin && (ref.pathname === '/' || ref.pathname === '/index.html') && history.length > 1) { e.preventDefault(); history.back(); return; }
+      sessionStorage.setItem('restoreHome', '1');
+    }));
+  } catch (_) { /* storage unavailable: plain links still work */ }
+
+  // first project screen: centre "Selected work" heading + first project together, keeping them close
+  const fitWork = () => {
+    const w = document.getElementById('work');
+    if (!w) return;
+    if (innerWidth <= 980) { w.style.paddingTop = ''; return; }
+    const head = w.querySelector('.sec-head'), row = w.querySelector('.prow');
+    const navH = 74, used = head.offsetHeight + parseFloat(getComputedStyle(head).marginBottom) + row.offsetHeight;
+    w.style.paddingTop = Math.max(navH + 10, navH + (innerHeight - navH - used) / 2) + 'px';
+  };
+  fitWork(); addEventListener('resize', fitWork); addEventListener('load', fitWork);
+
+  // ---------- motion layer ----------
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // scroll progress
+  const bar = document.createElement('div'); bar.className = 'progress'; document.body.appendChild(bar);
+  const prog = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`; };
+  addEventListener('scroll', prog, { passive: true }); prog();
+  if (!reduce) {
+    // headings rise word by word
+    document.querySelectorAll('.sec-head h2, .cs-sec h2, .contact h2, .about h2, .next b').forEach((h) => {
+      const walk = (node) => [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((w) => {
+            if (!w.trim()) { frag.appendChild(document.createTextNode(w)); return; }
+            const s = document.createElement('span'); s.className = 'wd'; s.textContent = w; frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+      });
+      walk(h); h.classList.add('split');
+      h.querySelectorAll('.wd').forEach((w, i) => { w.style.transitionDelay = (i * 0.06) + 's'; });
+      const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) { h.classList.add('in'); o.disconnect(); } }, { threshold: 0.3 });
+      o.observe(h);
+    });
+    // screenshots wipe in
+    const wipes = [];
+    document.querySelectorAll('.prow .frame, .block .shot, .cs-video .frame').forEach((f) => {
+      // observe the container: a fully clipped element never reports as intersecting
+      f.classList.remove('rv'); f.classList.add('wipe');
+      if (f.closest('.prow')) f.classList.add(['wipe-x', 'wipe-s', 'wipe-d'][[...document.querySelectorAll('.prow')].indexOf(f.closest('.prow')) % 3]);
+      if (f.closest('.cs-video')) f.classList.add('wipe-z');
+      // after the blinds open, drop the mask so the frame renders crisply
+      if (f.classList.contains('wipe-v')) f.addEventListener('transitionend', () => f.classList.add('done'), { once: true });
+      wipes.push(f);
+    });
+    // trigger on the frame's own position (getBoundingClientRect ignores clip-path), so each video animates where the reader can see it
+    const wipeCheck = () => {
+      for (let i = wipes.length - 1; i >= 0; i--) {
+        // start once about 90% of the frame is on screen, so the reader sees the whole entrance
+        const r = wipes[i].getBoundingClientRect();
+        const seen = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
+        if (seen >= Math.min(r.height * 0.9, innerHeight * 0.8)) {
+          const v = wipes[i].querySelector('video');
+          if (v) { try { v.currentTime = 0; } catch (_) {} v.play().catch(() => {}); }
+          wipes[i].classList.add('in'); wipes.splice(i, 1);
+        }
+      }
+    };
+    addEventListener('scroll', wipeCheck, { passive: true }); addEventListener('resize', wipeCheck); wipeCheck();
+    // gentle parallax: frames drift against the text column
+    const par = [...document.querySelectorAll('.prow .frame, .block .shot')];
+    const para = () => par.forEach((el) => { const r = el.getBoundingClientRect(); const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      el.style.translate = `0 ${(-c * 28).toFixed(1)}px`; });
+    addEventListener('scroll', para, { passive: true }); para();
+  }
+  if (fine && !reduce) {
+    // glass sheen follows the pointer; cards tilt toward it
+    document.querySelectorAll('.prow, .card, .lesson, .step, .contact-form, .stat').forEach((el) => {
+      el.classList.add('sheen');
+      el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect();
+        el.style.setProperty('--sx', (e.clientX - r.left) + 'px'); el.style.setProperty('--sy', (e.clientY - r.top) + 'px'); });
+    });
+    document.querySelectorAll('.card, .lesson, .step').forEach((el) => {
+      el.classList.add('tilt');
+      el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateY(-4px)`; });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+    // magnetic buttons
+    document.querySelectorAll('.btn, .more-link').forEach((el) => {
+      el.classList.add('magnet');
+      el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect();
+        el.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * 0.25).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * 0.35).toFixed(1)}px)`; });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
     });
   }
 

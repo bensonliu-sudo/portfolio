@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bingcheng Liu — Full-stack, AI Agents & Finance</title>
+<title>Bingcheng Liu — Full-stack AI & Agent Systems</title>
 <meta name="description" content="Bingcheng Liu takes ideas to production: full-stack products, AI agent systems, data platforms and quantitative tools. Selected work, with real product walkthroughs.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#050b1a">
-<meta property="og:title" content="Bingcheng Liu — Full-stack, AI Agents & Finance">
+<meta property="og:title" content="Bingcheng Liu — Full-stack AI & Agent Systems">
 <meta property="og:description" content="Full-stack, AI agent and data projects taken to production, with real product walkthroughs.">
-<meta property="og:image" content="/assets/multifactor/poster.jpg">
-<link rel="stylesheet" href="/assets/site.css?v=20261024b">
+<meta property="og:image" content="/assets/multifactor/poster.jpg?v=2">
+<link rel="stylesheet" href="/assets/site.css?v=20261024u">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -36,7 +36,7 @@
       <div class="eyebrow">Bingcheng Liu · 刘冰骋</div>
       <h1 id="hero-title"><span class="w" style="animation-delay:.05s">From</span> <span class="w" style="animation-delay:.17s">idea</span><br><span class="w accent" style="animation-delay:.32s">to</span> <span class="w accent" style="animation-delay:.44s">production.</span></h1>
       <ul class="roles" aria-label="Focus areas"><li>Full-stack engineering</li><li>AI agent systems</li><li>Forward-deployed engineering</li><li>Data platforms</li><li>Quantitative finance</li></ul>
-      <p class="lede">I build production-grade systems end to end: full-stack products, multi-agent AI workflows, data platforms and research tools. I work close to the people who use them, and every system ships with tests, evidence and a clear statement of its limits.</p>
+      <p class="lede">I build full-stack AI systems end to end, from data pipelines and multi-agent workflows to the interfaces people use every day. Recent work: an enterprise risk-intelligence platform, a research scoring engine and a desktop automation assistant.</p>
       <div class="cta">
         <a class="btn solid" href="#work">See selected work <span aria-hidden="true">↓</span></a>
         <a class="btn ghost" href="https://github.com/bensonliu-sudo">GitHub <span aria-hidden="true">↗</span></a>
@@ -54,19 +54,18 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="rv"><div class="eyebrow">Selected work</div><h2 id="work-title">Systems people<br><em>actually use.</em></h2></div>
-        <p class="rv d1">Each project has its own case study: a real walkthrough, the decisions behind it and an honest account of its limits.</p>
       </div>
 
       <div class="prows">
         <article class="prow">
           <a class="frame rv" href="/work/fris" aria-label="FRIS case study">
             <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>fris · risk dashboard</span></div>
-            <video data-auto src="/assets/fris/demo.mp4" poster="/assets/fris/poster.jpg" muted loop playsinline preload="metadata" aria-label="Screen recording of the FRIS risk intelligence platform on synthetic data"></video>
+            <video data-auto src="/assets/fris/demo.mp4?v=2" poster="/assets/fris/poster.jpg?v=2" muted loop playsinline preload="auto" aria-label="Screen recording of the FRIS risk intelligence platform on synthetic data"></video>
           </a>
           <div class="proj">
-            <div class="proj-num rv">01 · MULTI-AGENT RISK INTELLIGENCE</div>
+            <div class="proj-num rv">01 · REPUTATIONAL &amp; GOVERNANCE RISK MONITORING</div>
             <h3 class="rv d1">FRIS</h3>
-            <p class="lead rv d2">A multi-agent system tracking 220 asset managers. A deterministic pipeline collects and scores every development; a layer of AI agents, each owning one stage, inspects and corrects the model's judgements before the next stage reads them.</p>
+            <p class="lead rv d2">An enterprise platform that monitors reputational and governance risk at 220 fund managers. Every week it reads the news and regulatory releases about each one, scores every development on a 20-point scale, and shows due-diligence teams who is getting riskier, and why. An LLM judges each article; a team of AI agents checks those judgements stage by stage before rules turn them into the score.</p>
             <div class="mini rv d2">
               <div><b>288K</b><span>articles collected since launch</span></div>
               <div><b data-count="6">6</b><span>quality agents, one per stage</span></div>
@@ -80,12 +79,12 @@
         <article class="prow flip">
           <a class="frame rv" href="/work/multifactor-scoring" aria-label="Multi-factor stock scoring case study">
             <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>multi-factor-scoring · web app</span></div>
-            <video data-auto src="/assets/multifactor/demo.mp4" poster="/assets/multifactor/poster.jpg" muted loop playsinline preload="metadata" aria-label="Screen recording of the multi-factor scoring tool"></video>
+            <video data-auto src="/assets/multifactor/demo.mp4?v=2" poster="/assets/multifactor/poster.jpg?v=2" muted loop playsinline preload="auto" aria-label="Screen recording of the multi-factor scoring tool"></video>
           </a>
           <div class="proj">
             <div class="proj-num rv">02 · EQUITY RESEARCH TOOLING</div>
             <h3 class="rv d1">Multi-factor<br>stock scoring</h3>
-            <p class="lead rv d2">Researchers set the factors and weights; the tool turns them into exact, reproducible scores and an auditable stock pool, and explains every result factor by factor.</p>
+            <p class="lead rv d2">Turns a research team's factor weights into an exact, explainable stock pool, and shows what changes the moment a weight moves.</p>
             <div class="mini rv d2">
               <div><b data-count="5000" data-sep="1">5,000</b><span>stocks × 10 factors per request</span></div>
               <div><b data-count="166">166</b><span>automated tests</span></div>
@@ -99,12 +98,12 @@
         <article class="prow">
           <a class="frame win rv" href="/work/yrd-assistant" aria-label="YRD Assistant case study">
             <div class="frame-bar" aria-hidden="true"><span>YRD Assistant · desktop app</span><em>– □ ×</em></div>
-            <video data-auto src="/assets/yrd/demo.mp4" poster="/assets/yrd/poster.jpg" muted loop playsinline preload="metadata" aria-label="Screen recording of the YRD Assistant desktop app"></video>
+            <video data-auto src="/assets/yrd/demo.mp4?v=2" poster="/assets/yrd/poster.jpg?v=2" muted loop playsinline preload="auto" aria-label="Screen recording of the YRD Assistant desktop app"></video>
           </a>
           <div class="proj">
             <div class="proj-num rv">03 · WORKFLOW AUTOMATION</div>
             <h3 class="rv d1">YRD Assistant</h3>
-            <p class="lead rv d2">A desktop assistant for a financial publisher's daily market reports: it reads the morning commentary email, writes each section into the right WordPress draft, and keeps a human in charge of publishing.</p>
+            <p class="lead rv d2">Turns the morning market-commentary email into the day's two published reports, leaving only the final publish click to a person.</p>
             <div class="mini rv d2">
               <div><b data-count="4">4</b><span>sections into 2 reports, every business day</span></div>
               <div><b data-count="11">11</b><span>production issues logged and fixed</span></div>
@@ -153,7 +152,7 @@
     <div class="wrap about">
       <div class="rv"><div class="eyebrow">About</div><h2 id="about-title">Bingcheng<br>Liu</h2></div>
       <div class="rv d1">
-        <p>I work across the stack, from data ingestion and models to APIs, interfaces and the agents that tie them together. Finance is where I go deepest, but the same approach carries to any domain where results have to hold up in production.</p>
+        <p>I work across the stack, from data ingestion and models to APIs, interfaces and the agents that tie them together. Finance is one domain I know well, but the same approach carries to any domain where results have to hold up in production.</p>
         <p>I care about results that can be reproduced and explained, which is why the projects here come with tests, evidence and a clear statement of their limits.</p>
         <div class="actions"><a class="btn ghost" href="https://www.linkedin.com/in/bingcheng-liu-930a29385">LinkedIn <span aria-hidden="true">↗</span></a><a class="btn ghost" href="https://github.com/bensonliu-sudo">GitHub <span aria-hidden="true">↗</span></a><a class="btn ghost" href="#contact">Get in touch <span aria-hidden="true">↓</span></a></div>
       </div>
@@ -185,8 +184,8 @@
   </section>
 </main>
 
-<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
 
-<script src="/assets/site.js?v=20261024b"></script>
+<script src="/assets/site.js?v=20261024u"></script>
 </body>
 </html>
