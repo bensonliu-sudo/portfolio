@@ -86,6 +86,17 @@
     }));
   } catch (_) { /* storage unavailable: plain links still work */ }
 
+  // first project screen: centre "Selected work" heading + first project together, keeping them close
+  const fitWork = () => {
+    const w = document.getElementById('work');
+    if (!w) return;
+    if (innerWidth <= 980) { w.style.paddingTop = ''; return; }
+    const head = w.querySelector('.sec-head'), row = w.querySelector('.prow');
+    const navH = 74, used = head.offsetHeight + parseFloat(getComputedStyle(head).marginBottom) + row.offsetHeight;
+    w.style.paddingTop = Math.max(navH + 10, navH + (innerHeight - navH - used) / 2) + 'px';
+  };
+  fitWork(); addEventListener('resize', fitWork); addEventListener('load', fitWork);
+
   // ---------- motion layer ----------
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   // scroll progress

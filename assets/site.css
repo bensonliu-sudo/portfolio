@@ -404,3 +404,36 @@ body::after{width:58vw;height:58vw;right:-16vw;bottom:-18vh;
 /* case-study header fills exactly one screen, content centred */
 .cs-hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:clamp(84px,11vh,120px) 0 clamp(28px,5vh,60px)}
 .cs-hero > .wrap{width:var(--wrap)}
+/* very short viewports (e.g. 1080p at 150% scaling, 1366x768 laptops): tighten the first project screen */
+@media(max-height:700px){
+  #work{padding-top:78px}
+  #work .sec-head h2{font-size:min(4.4vw,46px)}
+  .prow .proj p.lead{font-size:14px;line-height:1.5}
+  .prow .proj h3{font-size:clamp(30px,3.4vw,44px)}
+  .prow .mini b{font-size:28px}
+}
+
+/* large screens (Windows desktops, 2K/4K, ultrawide): widen the column and scale type so the layout keeps its proportions */
+@media(min-width:1800px){
+  :root{--wrap:min(1480px,calc(100% - 160px))}
+  .nav-links{font-size:15px}
+  .hero h1{font-size:min(9.4vw,168px,15.5vh)}
+  .lede{font-size:clamp(19px,min(1.3vw,2.6vh),23px);max-width:760px}
+  .roles li{font-size:14px}
+  #work .sec-head h2{font-size:min(5.2vw,84px,8.2vh)}
+  .prow .proj h3{font-size:clamp(48px,3.4vw,68px)}
+  .prow .proj p.lead{font-size:19px}
+  .prow .mini b{font-size:42px}.prow .mini span{font-size:13px;max-width:180px}
+  .more-link{font-size:15px}
+  .cs-hero h1{font-size:min(5.6vw,110px,10.5vh)}
+  .cs-hero .lede{font-size:clamp(17px,min(1.2vw,2.3vh),21px);max-width:900px}
+  .cs-video .frame{max-width:min(100%,1200px,calc((100svh - 190px) * 1.6))}
+  .block .shot{max-width:640px}.block p,.prose p{font-size:18px}
+}
+@media(min-width:2400px){
+  :root{--wrap:min(1720px,calc(100% - 200px))}
+  .prow .proj p.lead{font-size:21px}
+  .prow .mini b{font-size:48px}
+  .prow .proj h3{font-size:clamp(56px,3vw,78px)}
+  .block .shot{max-width:740px}
+}
