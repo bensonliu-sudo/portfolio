@@ -327,3 +327,12 @@ em,.hero h1 .accent{background:linear-gradient(100deg,var(--accent) 20%,#5fd3f3 
   .split .wd,.wipe{opacity:1;transform:none;filter:none;clip-path:none;transition:none}
   em,.hero h1 .accent{animation:none}.progress{display:none}
 }
+
+/* hero always fits one screen: sizes follow viewport height as well as width */
+.hero-in{padding:clamp(92px,13vh,140px) 0 clamp(64px,9vh,120px)}
+.hero h1{font-size:min(9.4vw,138px,15.5vh);margin:clamp(14px,3.2vh,34px) 0 clamp(16px,3.4vh,34px)}
+.roles{margin:0 0 clamp(14px,2.8vh,30px)}
+.lede{font-size:clamp(16px,min(1.6vw,2.5vh),21px)}
+.cta{margin-top:clamp(18px,3.6vh,40px)}
+.scroll-cue{bottom:clamp(12px,2.5vh,34px)}
+@media(max-height:700px){.scroll-cue{display:none}}
