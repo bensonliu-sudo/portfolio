@@ -116,7 +116,7 @@ def page(cs, nxt):
   <a class="next wrap" href="/work/{nxt["slug"]}"><div class="eyebrow">Next case study</div><b>{nxt["title_plain"]} <i aria-hidden="true">→</i></b></a>
 </main>
 
-<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Finance</span></div></footer>
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
 <script src="/assets/site.js?v=20261024f"></script>
 </body>
 </html>
@@ -130,7 +130,7 @@ CASES = [
     dict(
         slug="fris", eyebrow="Case study · 01 · Reputational and governance risk monitoring",
         title_plain="FRIS", title_html="FRIS <em>fund manager risk monitoring</em>",
-        summary="FRIS monitors reputational and governance risk at 220 fund managers for due-diligence and investment teams. Every week it reads the news and regulatory releases about each manager, scores every development on a 20-point scale, and shows who is getting riskier, and why. An LLM judges each article, a multi-agent quality layer checks those judgements stage by stage, and deterministic rules turn them into a score an analyst can defend.",
+        summary="FRIS is an enterprise platform that monitors reputational and governance risk at 220 fund managers for due-diligence and investment teams. Every week it reads the news and regulatory releases about each manager, scores every development on a 20-point scale, and shows who is getting riskier, and why. An LLM judges each article, a multi-agent quality layer checks those judgements stage by stage, and deterministic rules turn them into a score an analyst can defend.",
         meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, agents, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
               ("Stack", "Python · LangGraph · FastAPI · PostgreSQL · Next.js · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
         frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4", poster=f"{FR}/poster.jpg",
