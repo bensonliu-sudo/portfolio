@@ -336,3 +336,22 @@ em,.hero h1 .accent{background:linear-gradient(100deg,var(--accent) 20%,#5fd3f3 
 .cta{margin-top:clamp(18px,3.6vh,40px)}
 .scroll-cue{bottom:clamp(12px,2.5vh,34px)}
 @media(max-height:700px){.scroll-cue{display:none}}
+
+/* homepage project rows: no panels, one screen per project, gentle snap (2026-10-24) */
+#work{padding:clamp(84px,11vh,112px) 0 0}
+#work .sec-head{margin-bottom:clamp(12px,2.5vh,30px)}
+#work .sec-head h2{font-size:min(5.2vw,68px,8.2vh)}
+.prows{gap:0}
+.prow{padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;overflow:visible}
+.prow::after{display:none}
+.prow + .prow{min-height:100svh;padding:clamp(84px,10vh,100px) 0 clamp(24px,4vh,48px)}
+.prow:first-child{padding-bottom:clamp(40px,7vh,80px)}
+.prow .tags{display:none}
+.prow .proj h3{margin:clamp(8px,1.6vh,16px) 0 clamp(10px,2vh,22px)}
+.prow .proj p.lead{font-size:clamp(15px,min(1.25vw,2.2vh),17px);margin-bottom:0}
+.prow .mini{margin:clamp(14px,2.6vh,26px) 0 clamp(14px,2.6vh,24px);padding-top:clamp(12px,2.2vh,22px)}
+.prow .frame{max-height:min(62vh,520px)}
+.prow .frame video{max-height:calc(min(62vh,520px) - 40px)}
+html{scroll-snap-type:y proximity}
+.hero,#work,.prow + .prow,#approach,#more,#about,#contact{scroll-snap-align:start}
+@media(max-width:980px){.prow + .prow{min-height:auto;padding:60px 0}html{scroll-snap-type:none}}
