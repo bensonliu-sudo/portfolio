@@ -111,7 +111,7 @@
     document.querySelectorAll('.prow .frame, .block .shot, .cs-video .frame').forEach((f) => {
       // observe the container: a fully clipped element never reports as intersecting
       f.classList.remove('rv'); f.classList.add('wipe');
-      if (f.closest('.prow')) f.classList.add(['wipe-v', 'wipe-s', 'wipe-d'][[...document.querySelectorAll('.prow')].indexOf(f.closest('.prow')) % 3]);
+      if (f.closest('.prow')) f.classList.add(['wipe-x', 'wipe-s', 'wipe-d'][[...document.querySelectorAll('.prow')].indexOf(f.closest('.prow')) % 3]);
       if (f.closest('.cs-video')) f.classList.add('wipe-z');
       // after the blinds open, drop the mask so the frame renders crisply
       if (f.classList.contains('wipe-v')) f.addEventListener('transitionend', () => f.classList.add('done'), { once: true });
@@ -120,8 +120,10 @@
     // trigger on the frame's own position (getBoundingClientRect ignores clip-path), so each video animates where the reader can see it
     const wipeCheck = () => {
       for (let i = wipes.length - 1; i >= 0; i--) {
+        // start once about 90% of the frame is on screen, so the reader sees the whole entrance
         const r = wipes[i].getBoundingClientRect();
-        if (r.top < innerHeight * 0.85 && r.bottom > 0) { wipes[i].classList.add('in'); wipes.splice(i, 1); }
+        const seen = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
+        if (seen >= Math.min(r.height * 0.9, innerHeight * 0.8)) { wipes[i].classList.add('in'); wipes.splice(i, 1); }
       }
     };
     addEventListener('scroll', wipeCheck, { passive: true }); addEventListener('resize', wipeCheck); wipeCheck();
