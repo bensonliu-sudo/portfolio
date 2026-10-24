@@ -356,3 +356,12 @@ em,.hero h1 .accent{background:linear-gradient(100deg,var(--accent) 20%,#5fd3f3 
 
 /* case-study walkthrough fits one screen: width capped by viewport height (16:10 video + 40px bar) */
 .cs-video .frame{max-width:min(100%,calc((100svh - 150px) * 1.6));margin:0 auto}
+
+/* each homepage project enters differently: FRIS wipes left→right, multi-factor opens from the centre, YRD tilts up */
+.wipe.wipe-l{clip-path:inset(0 100% 0 0 round 14px)}
+.wipe.wipe-l.in{clip-path:inset(0 0 0 0 round 14px)}
+.wipe.wipe-c{clip-path:circle(0% at 50% 50%);transition:clip-path 1.5s cubic-bezier(.65,0,.25,1)}
+.wipe.wipe-c.in{clip-path:circle(75% at 50% 50%)}
+.wipe.wipe-t{clip-path:none;opacity:0;transform:perspective(1400px) rotateX(28deg) translateY(60px) scale(.94);transform-origin:50% 100%;
+  transition:opacity 1.1s cubic-bezier(.2,.75,.2,1),transform 1.3s cubic-bezier(.2,.75,.2,1)}
+.wipe.wipe-t.in{opacity:1;transform:none}
