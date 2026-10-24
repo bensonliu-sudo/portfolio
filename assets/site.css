@@ -445,3 +445,4 @@ body::after{width:58vw;height:58vw;right:-16vw;bottom:-18vh;
 .quote figcaption{font-size:13px;color:var(--faint);letter-spacing:.02em}
 .quote figcaption span{color:var(--muted)}
 .quote figcaption i{font-style:normal;opacity:.75}
+.quote figcaption cite{font-style:italic}
