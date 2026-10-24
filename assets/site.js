@@ -90,13 +90,21 @@
       o.observe(h);
     });
     // screenshots wipe in
+    const wipes = [];
     document.querySelectorAll('.prow .frame, .block .shot, .cs-video .frame').forEach((f) => {
       // observe the container: a fully clipped element never reports as intersecting
       f.classList.remove('rv'); f.classList.add('wipe');
       if (f.closest('.prow')) f.classList.add(['wipe-l', 'wipe-c', 'wipe-t'][[...document.querySelectorAll('.prow')].indexOf(f.closest('.prow')) % 3]);
-      const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) { f.classList.add('in'); o.disconnect(); } }, { threshold: 0.12 });
-      o.observe(f.parentElement);
+      wipes.push(f);
     });
+    // trigger on the frame's own position (getBoundingClientRect ignores clip-path), so each video animates where the reader can see it
+    const wipeCheck = () => {
+      for (let i = wipes.length - 1; i >= 0; i--) {
+        const r = wipes[i].getBoundingClientRect();
+        if (r.top < innerHeight * 0.85 && r.bottom > 0) { wipes[i].classList.add('in'); wipes.splice(i, 1); }
+      }
+    };
+    addEventListener('scroll', wipeCheck, { passive: true }); addEventListener('resize', wipeCheck); wipeCheck();
     // gentle parallax: frames drift against the text column
     const par = [...document.querySelectorAll('.prow .frame, .block .shot')];
     const para = () => par.forEach((el) => { const r = el.getBoundingClientRect(); const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
