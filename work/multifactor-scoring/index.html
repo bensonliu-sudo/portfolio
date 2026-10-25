@@ -35,7 +35,7 @@
       <div class="eyebrow">Case study · 02 · Equity research tooling</div>
       <h1>Multi-factor<br><em>stock scoring</em></h1>
       <p class="lede">A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.</p>
-      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer: design, backend, frontend, tests</dd></div><div><dt>Year</dt><dd>2026</dd></div><div><dt>Stack</dt><dd>Python · FastAPI · NumPy · SQLite · vanilla JS</dd></div><div><dt>Status</dt><dd>Working tool; private repository, source on request</dd></div></dl>
+      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole developer: design, backend, frontend, tests</dd></div><div><dt>Year</dt><dd>2026</dd></div><div><dt>Stack</dt><dd>Python · FastAPI · NumPy · SQLite · vanilla JS</dd></div><div><dt>Status</dt><dd>Runs on ~2,300 US equities in my own research platform; private repository, source on request</dd></div></dl>
     </div>
   </section>
 
@@ -85,7 +85,7 @@
     <div class="wrap">
       <div class="rv"><div class="eyebrow">How it was built</div><h2>Built with AI,<br><em>verified</em> like production.</h2></div>
       <div class="lessons"><div class="lesson rv"><b>Pin down the spec first</b><p>Every ambiguous rule (rounding, ties, missing values, clipping order) was written down and checked against an independent reference implementation before features were built on it.</p></div><div class="lesson rv d1"><b>Ship in gated packages</b><p>Engine, service, frontend and performance were separate packages. Each was frozen, hashed and reviewed before the next one started.</p></div><div class="lesson rv"><b>Independent adversarial review</b><p>A second AI re-computed results, injected faults and replayed real usage. Fifteen genuine errors were found this way; each one is documented with its fix.</p></div><div class="lesson rv d1"><b>Measure, don't assume</b><p>Performance claims come from a stress test at 5,000 stocks and 10 factors, timed end to end through the HTTP API.</p></div></div>
-      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>Scores one cross-section at a time; multi-period data and incremental updates are future work.</li><li>No factor research, weight optimisation or backtesting, by design.</li><li>Demo data is synthetic: 200 sample companies across 10 industries.</li></ul></div>
+      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>Scores one cross-section at a time; multi-period data and incremental updates are future work.</li><li>No factor research, weight optimisation or backtesting, by design.</li><li>The recording uses synthetic data (200 sample companies across 10 industries). The same tool runs unchanged on ~2,300 US equities and 12 fundamental and momentum factors in my own research platform; those data and results are not shown here.</li></ul></div>
     </div>
   </section>
 

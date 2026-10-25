@@ -181,7 +181,7 @@ CASES = [
         slug="multifactor-scoring", eyebrow="Case study · 02 · Equity research tooling",
         title_plain="Multi-factor stock scoring", title_html="Multi-factor<br><em>stock scoring</em>",
         summary="A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.",
-        meta=[("Role", "Sole developer: design, backend, frontend, tests"), ("Year", "2026"), ("Stack", "Python · FastAPI · NumPy · SQLite · vanilla JS"), ("Status", "Working tool; private repository, source on request")],
+        meta=[("Role", "Sole developer: design, backend, frontend, tests"), ("Year", "2026"), ("Stack", "Python · FastAPI · NumPy · SQLite · vanilla JS"), ("Status", "Runs on ~2,300 US equities in my own research platform; private repository, source on request")],
         frame="browser", frame_label="multi-factor-scoring · live walkthrough", video=f"{MF}/demo.mp4?v=2", poster=f"{MF}/poster.jpg?v=2",
         video_label="37-second screen recording of the multi-factor scoring tool on synthetic data",
         problem_h="Pools built by hand,<br><em>hard to explain.</em>",
@@ -210,7 +210,7 @@ CASES = [
                  ("Measure, don't assume", "Performance claims come from a stress test at 5,000 stocks and 10 factors, timed end to end through the HTTP API.")],
         limits=["Scores one cross-section at a time; multi-period data and incremental updates are future work.",
                 "No factor research, weight optimisation or backtesting, by design.",
-                "Demo data is synthetic: 200 sample companies across 10 industries."],
+                "The recording uses synthetic data (200 sample companies across 10 industries). The same tool runs unchanged on ~2,300 US equities and 12 fundamental and momentum factors in my own research platform; those data and results are not shown here."],
     ),
     dict(
         slug="yrd-assistant", eyebrow="Case study · 03 · Workflow automation",
