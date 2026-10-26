@@ -10,7 +10,7 @@
 <meta property="og:title" content="Bingcheng Liu — Full-stack AI & Agent Systems">
 <meta property="og:description" content="Full-stack, AI agent and data projects taken to production, with real product walkthroughs.">
 <meta property="og:image" content="/assets/multifactor/poster.jpg?v=2">
-<link rel="stylesheet" href="/assets/site.css?v=20261025a">
+<link rel="stylesheet" href="/assets/site.css?v=20261026a">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -36,7 +36,7 @@
       <div class="eyebrow">Bingcheng Liu · 刘冰骋</div>
       <h1 id="hero-title"><span class="w" style="animation-delay:.05s">From</span> <span class="w" style="animation-delay:.17s">idea</span><br><span class="w accent" style="animation-delay:.32s">to</span> <span class="w accent" style="animation-delay:.44s">production.</span></h1>
       <ul class="roles" aria-label="Focus areas"><li>Full-stack engineering</li><li>AI agent systems</li><li>Forward-deployed engineering</li><li>Data platforms</li><li>Quantitative finance</li></ul>
-      <p class="lede">I build full-stack AI systems end to end, from data pipelines and multi-agent workflows to the interfaces people use every day. Recent work: an enterprise risk-intelligence platform, a research scoring engine and a desktop automation assistant.</p>
+      <p class="lede">I build full-stack AI systems end to end, from data pipelines and multi-agent workflows to the interfaces people use every day. Recent work: an enterprise risk-intelligence platform, my own data terminal and trading system running in the cloud, a scoring engine and a desktop automation assistant.</p>
       <div class="cta">
         <a class="btn solid" href="#work">See selected work <span aria-hidden="true">↓</span></a>
         <a class="btn ghost" href="https://github.com/bensonliu-sudo">GitHub <span aria-hidden="true">↗</span></a>
@@ -77,12 +77,31 @@
         </article>
 
         <article class="prow flip">
+          <a class="frame rv" href="/work/wald" aria-label="WALD case study">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>wald · data terminal → trading desk</span></div>
+            <video data-auto src="/assets/wald/demo.mp4?v=1" poster="/assets/wald/poster.jpg?v=1" muted loop playsinline preload="auto" aria-label="Screen recording of the WALD data terminal and trading desk"></video>
+          </a>
+          <div class="proj">
+            <div class="proj-num rv">02 · DATA TERMINAL &amp; TRADING SYSTEM</div>
+            <h3 class="rv d1">WALD</h3>
+            <p class="lead rv d2">My own platform for US equities, built for production and in development. A data terminal turns market, filing, news and industry data into point-in-time datasets, with an AI supply chain mapped from primary evidence. A trading system on the same data uses an LLM as analyst and code for risk and execution, with services running 24/7 in the cloud.</p>
+            <div class="mini rv d2">
+              <div><b data-count="1500" data-sep="1">1,500</b><span>data sources probed and catalogued</span></div>
+              <div><b data-count="171">171</b><span>companies on the AI supply-chain map</span></div>
+              <div><b data-count="24">24</b><span>cloud services running around the clock</span></div>
+            </div>
+            <div class="tags rv d3"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">LLM agents</span><span class="tag">Azure</span><span class="tag">Vanilla JS</span></div>
+            <a class="more-link rv d4" href="/work/wald">Read the case study <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="prow">
           <a class="frame rv" href="/work/multifactor-scoring" aria-label="Multi-factor stock scoring case study">
             <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>multi-factor-scoring · web app</span></div>
             <video data-auto src="/assets/multifactor/demo.mp4?v=2" poster="/assets/multifactor/poster.jpg?v=2" muted loop playsinline preload="auto" aria-label="Screen recording of the multi-factor scoring tool"></video>
           </a>
           <div class="proj">
-            <div class="proj-num rv">02 · EQUITY RESEARCH TOOLING</div>
+            <div class="proj-num rv">03 · EQUITY RESEARCH TOOLING</div>
             <h3 class="rv d1">Multi-factor<br>stock scoring</h3>
             <p class="lead rv d2">Turns a research team's factor weights into an exact, explainable stock pool, and shows what changes the moment a weight moves.</p>
             <div class="mini rv d2">
@@ -95,13 +114,13 @@
           </div>
         </article>
 
-        <article class="prow">
+        <article class="prow flip">
           <a class="frame win rv" href="/work/yrd-assistant" aria-label="YRD Assistant case study">
             <div class="frame-bar" aria-hidden="true"><span>YRD Assistant · desktop app</span><em>– □ ×</em></div>
             <video data-auto src="/assets/yrd/demo.mp4?v=2" poster="/assets/yrd/poster.jpg?v=2" muted loop playsinline preload="auto" aria-label="Screen recording of the YRD Assistant desktop app"></video>
           </a>
           <div class="proj">
-            <div class="proj-num rv">03 · WORKFLOW AUTOMATION</div>
+            <div class="proj-num rv">04 · WORKFLOW AUTOMATION</div>
             <h3 class="rv d1">YRD Assistant</h3>
             <p class="lead rv d2">Turns the morning market-commentary email into the day's two published reports, leaving only the final publish click to a person.</p>
             <div class="mini rv d2">
@@ -190,6 +209,6 @@
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
 
-<script src="/assets/site.js?v=20261025a"></script>
+<script src="/assets/site.js?v=20261026a"></script>
 </body>
 </html>
