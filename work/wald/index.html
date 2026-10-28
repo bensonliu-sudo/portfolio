@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WALD — Bingcheng Liu</title>
+<meta name="description" content="WALD is my own platform for US equities: a data terminal and a trading system on one shared data layer, with its always-on services running 24/7 on Azure. The terminal turns market, filing, news and industry data into point-in-time datasets behind one read-only API and a terminal-style workspace, with industry-chain analysis at its core. The trading system uses an LLM as its analyst and code for forecasting, sizing, independent risk and execution.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#050b1a">
+<meta property="og:title" content="WALD — Bingcheng Liu">
+<meta property="og:description" content="WALD is my own platform for US equities: a data terminal and a trading system on one shared data layer, with its always-on services running 24/7 on Azure. The terminal turns market, filing, news and industry data into point-in-time datasets behind one read-only API and a terminal-style workspace, with industry-chain analysis at its core. The trading system uses an LLM as its analyst and code for forecasting, sizing, independent risk and execution.">
+<meta property="og:image" content="/assets/wald/poster.jpg?v=2">
+<link rel="stylesheet" href="/assets/site.css?v=20261026a">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav theme-dark" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Bingcheng Liu home">BL<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/#work">Work</a>
+      <a href="/#approach" class="hide-s">Approach</a>
+      <a href="/#more">Projects</a>
+      <a href="/#about" class="hide-s">About</a>
+      <a href="/#contact">Contact</a>
+      <a href="https://github.com/bensonliu-sudo" class="hide-s">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cs-hero theme-dark">
+    <div class="wrap">
+      <a class="back" href="/#work" data-home><span aria-hidden="true">←</span> All work</a>
+      <div class="eyebrow">Case study · 02 · Data terminal and trading system</div>
+      <h1>WALD <em>data &amp; trading</em></h1>
+      <p class="lede">WALD is my own platform for US equities: a data terminal and a trading system on one shared data layer, with its always-on services running 24/7 on Azure. The terminal turns market, filing, news and industry data into point-in-time datasets behind one read-only API and a terminal-style workspace, with industry-chain analysis at its core. The trading system uses an LLM as its analyst and code for forecasting, sizing, independent risk and execution.</p>
+      <dl class="cs-meta"><div><dt>Role</dt><dd>Sole architect and developer: data pipelines, database, APIs, agents, both frontends, cloud operations</dd></div><div><dt>Year</dt><dd>2026</dd></div><div><dt>Stack</dt><dd>Python · PostgreSQL · Parquet · vanilla JS · Azure · systemd · LLM APIs</dd></div><div><dt>Status</dt><dd>Running 24/7 on Azure since October 2026; private repository</dd></div></dl>
+    </div>
+  </section>
+
+  <section class="cs-video"><div class="wrap"><div class="frame rv"><div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>wald · data terminal → trading desk</span></div><video data-auto src="/assets/wald/demo.mp4?v=3" poster="/assets/wald/poster.jpg?v=2" muted loop playsinline preload="metadata" controls aria-label="97-second screen recording of the WALD data terminal and trading desk"></video></div></div></section>
+
+  <section class="cs-sec">
+    <div class="wrap cs-two">
+      <div class="rv"><div class="eyebrow">The problem</div><h2>What was known, when,<br><em>and who it reaches.</em></h2></div>
+      <div class="prose rv d1"><p>Trading on events means answering three questions fast: <b>what just happened, what was already known, and which companies it reaches</b>. The answers sit in a dozen sources with different clocks: exchange data, SEC filings, news wires, macro releases, foreign disclosures.</p><p>Most of the errors are quiet. A restated quarter or a renamed ticker leaks <b>information from the future</b> into a backtest; a filing time recorded in the wrong time zone shifts a whole replay by hours.</p><p>And the most valuable signal is often one step removed: a supplier's contract, a memory price, a capacity commitment. Seeing it needs <b>a supply chain mapped from primary evidence</b>, not a list of tickers.</p></div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">What I built</div><h2>One data layer,<br><em>two products, always on.</em></h2></div>
+      <div class="blocks">
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/wald/cockpit.jpg"><img src="/assets/wald/cockpit.jpg" alt="Cockpit heat map of the AI supply chain" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">01 · INDUSTRY-CHAIN ANALYSIS</div><h3>The AI supply chain, live</h3><p>The terminal opens on a heat map of the AI supply chain, grouped by stage. Sector and theme heat maps and an infrastructure map from hyperscalers down to chips, packaging, power and cooling are one click away, and every company opens onto its own supply chain.</p><ul><li>Any company's suppliers and customers, five tiers up and down</li><li>Peers, orders, partnerships and investments as separate relation types</li><li>Every link marked as filed, registered or inferred</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/wald/hbm_dash.jpg"><img src="/assets/wald/hbm_dash.jpg" alt="HBM workbench dashboard" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">02 · ONE CHAIN IN DEPTH</div><h3>Built from primary sources</h3><p>The HBM workbench follows the memory chain end to end: supply, demand, pricing, capacity, qualification and product roadmaps per supplier. Relationships come from filings, such as supply contracts disclosed to the Korean regulator, with their correction history kept.</p><ul><li>201 Korean supply-contract disclosures parsed, with 168 correction links</li><li>Capacity commitments and product roadmaps tracked per company</li><li>A research trail runs event → product → evidence → impact</li></ul></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/wald/asof.jpg"><img src="/assets/wald/asof.jpg" alt="Company financials replayed as of a past date" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">03 · POINT-IN-TIME DATA</div><h3>Every row knows when it became known</h3><p>Raw files land in an append-only lake, become fixed-version products, then a PostgreSQL database where every row carries the time it became available. Any page, API call or script can be replayed as of a past date and sees only what was known then.</p><ul><li>Row-level security enforces the cutoff in the database, not in the page</li><li>Restatements kept as versions; ticker, CIK and FIGI resolved by date</li><li>Strict mode refuses a historical request it cannot honour instead of silently degrading</li></ul></div>
+        </div>
+        <div class="block flip">
+          <figure class="shot rv"><a href="/assets/wald/desk.jpg"><img src="/assets/wald/desk.jpg" alt="Trading desk overview" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">04 · TRADING SYSTEM</div><h3>The model analyses; code decides</h3><p>An LLM reads the filings and news and writes a research file with scenario prices by horizon. Code turns that into candidates, a manager sizes them, an independent risk station can veto, and a trader places limit orders. Every station leaves a versioned, hashed receipt.</p><ul><li>Inputs unlock at the time they were received, and model inputs are scanned for leaks</li><li>Daily model budget enforced across all runs, with circuit breakers</li><li>Research memory: dated facts, live theses and expectation cards frozen before earnings</li></ul></div>
+        </div>
+        <div class="block">
+          <figure class="shot rv"><a href="/assets/wald/cloud.svg"><img src="/assets/wald/cloud.svg" alt="Cloud deployment diagram" loading="lazy"></a></figure>
+          <div class="rv d1"><div class="k">05 · CLOUD OPERATIONS</div><h3>Always on, on Azure</h3><p>The platform's always-on layer runs on an Azure VM: 24 systemd services ingest SEC filings every minute with their acceptance times, read news wires and regulator releases, record quotes and order-flow tapes, freeze and score shadow forecasts, and keep a headless broker gateway connected to a paper account on a private network, its API bound to loopback.</p><ul><li>Hash-locked deployer: verifies hashes, checks for zero open positions and orders, drains running jobs and writes a receipt</li><li>Every deploy approved by an independent reviewer first; six in one day, including during market hours</li><li>Watchdog checks every service every 10 minutes and alerts on change; daily briefing, backup and cold copy with restore checks</li><li>Model spend reserved and settled per call under daily caps; ledger, logs and broker reconciled</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">By the numbers</div></div>
+      <div class="stats" style="margin-top:30px"><div class="stat rv"><b>1,050</b><span>data sources verified working, from 1,500 probed</span></div><div class="stat rv d1"><b>20,291</b><span>US securities in the versioned security master</span></div><div class="stat rv d2"><b>16.5M</b><span>rows in the point-in-time database, across 189 tables</span></div><div class="stat rv d3"><b>577K</b><span>news documents from 15 sources</span></div></div><p class="stats-note rv">Data terminal, as of 26 October 2026.</p>
+      <div class="stats" style="margin-top:40px"><div class="stat rv"><b>851K</b><span>issuer-month fundamentals rows, 7,697 issuers, 2009 to 2026</span></div><div class="stat rv d1"><b>4,900</b><span>US stocks × 12 factors in the multi-factor panel</span></div><div class="stat rv d2"><b>3.8M</b><span>daily price bars, raw and adjusted</span></div><div class="stat rv d3"><b>2.06M</b><span>segment-revenue rows taken from filings</span></div></div><p class="stats-note rv">Depth of the data.</p>
+      <div class="stats" style="margin-top:40px"><div class="stat rv"><b>24<small>/7</small></b><span>on Azure since 10 October 2026, 24 systemd services</span></div><div class="stat rv d1"><b>48,953</b><span>SEC filing files ingested into the cloud lake</span></div><div class="stat rv d2"><b>162</b><span>synthetic scenarios and 157 unit tests on the decision chain</span></div><div class="stat rv d3"><b>3,215</b><span>historical cases for calibration and replay</span></div></div><p class="stats-note rv">Trading system and cloud operations.</p>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <div class="rv"><div class="eyebrow">How it was built</div><h2>Run like production,<br><em>from day one.</em></h2></div>
+      <div class="lessons"><div class="lesson rv"><b>Builder and reviewer, separated</b><p>Every work package is self-checked against the reviewer's likely attacks, then accepted by an independent AI reviewer before it is committed.</p></div><div class="lesson rv d1"><b>Known when, not just known</b><p>Every row carries when it became available and how that time was established. The database enforces the cutoff, so a replay cannot see the future.</p></div><div class="lesson rv"><b>Every link needs a source</b><p>A supply-chain relation is filed, registered or inferred, and says so. Inferred links never pass as disclosed ones.</p></div><div class="lesson rv d1"><b>The model analyses; code decides</b><p>The LLM writes research and scenarios. Sizing, risk limits, stops and orders are code, and the risk station ignores the model's opinion.</p></div><div class="lesson rv"><b>Deploys are approved and reversible</b><p>No file reaches the cloud without a recorded approval, a hash check before and after, and a receipt.</p></div><div class="lesson rv d1"><b>Fail safe, not silent</b><p>When a budget runs out, new paid work stops but risk checks, protective orders and checkpoints keep running.</p></div></div>
+      <div class="limits rv"><div class="eyebrow" style="margin-bottom:14px">Scope and limits</div><ul><li>Orders go to a paper account; live accounts are never connected.</li><li>Some industry dashboards appear in their labelled sample mode, and the interface is in Chinese.</li></ul></div>
+    </div>
+  </section>
+
+  <a class="next wrap" href="/work/multifactor-scoring"><div class="eyebrow">Next case study</div><b>Multi-factor stock scoring <i aria-hidden="true">→</i></b></a>
+</main>
+
+<footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
+<script src="/assets/site.js?v=20261026a"></script>
+</body>
+</html>

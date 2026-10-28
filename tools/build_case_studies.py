@@ -63,7 +63,7 @@ def page(cs, nxt):
 <meta property="og:title" content="{cs["title_plain"]} — Bingcheng Liu">
 <meta property="og:description" content="{escape(cs["summary"])}">
 <meta property="og:image" content="{cs["poster"]}">
-<link rel="stylesheet" href="/assets/site.css?v=20261025a">
+<link rel="stylesheet" href="/assets/site.css?v=20261026a">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -119,7 +119,7 @@ def page(cs, nxt):
 </main>
 
 <footer class="theme-dark"><div class="foot"><span>© 2026 Bingcheng Liu</span><span>Full-stack · AI agents · Data</span></div></footer>
-<script src="/assets/site.js?v=20261025a"></script>
+<script src="/assets/site.js?v=20261026a"></script>
 </body>
 </html>
 '''
@@ -128,6 +128,7 @@ def page(cs, nxt):
 MF = "/assets/multifactor"
 YRD = "/assets/yrd"
 FR = "/assets/fris"
+WD = "/assets/wald"
 CASES = [
     dict(
         slug="fris", eyebrow="Case study · 01 · Reputational and governance risk monitoring",
@@ -135,7 +136,7 @@ CASES = [
         summary="FRIS is an enterprise platform that monitors reputational and governance risk at 220 fund managers for due-diligence and investment teams. Every week it reads the news and regulatory releases about each manager, scores every development on a 20-point scale, and shows who is getting riskier, and why. An LLM judges each article, a multi-agent quality layer checks those judgements stage by stage, and deterministic rules turn them into a score an analyst can defend.",
         meta=[("Role", "Sole developer, built for an employer: data, AI pipeline, agents, backend, frontend, deployment"), ("Timeline", "February to October 2026"),
               ("Stack", "Python · LangGraph · FastAPI · PostgreSQL · Next.js · Azure"), ("Status", "Deployed to the cloud with sign-in; private repository")],
-        frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4?v=2", poster=f"{FR}/poster.jpg?v=2",
+        frame="browser", frame_label="fris · risk dashboard", video=f"{FR}/demo.mp4?v=3", poster=f"{FR}/poster.jpg?v=2",
         video_label="71-second screen recording of FRIS running on fictional entities and synthetic data",
         problem_h="Early warning, buried<br><em>in thousands of articles.</em>",
         problem=["Analysts who oversee fund managers on behalf of clients need to know early when a manager runs into trouble: redemptions gated, an investor class action, a regulator's probe. The signals are spread across <b>thousands of articles a week</b>, in many sources and several languages, and most of them are noise.",
@@ -178,11 +179,60 @@ CASES = [
                 "The recording runs the real frontend against a demo backend: every manager, client, headline and figure in it is fictional, and the employer's name is removed."],
     ),
     dict(
-        slug="multifactor-scoring", eyebrow="Case study · 02 · Equity research tooling",
+        slug="wald", eyebrow="Case study · 02 · Data terminal and trading system",
+        title_plain="WALD", title_html="WALD <em>data &amp; trading</em>",
+        summary="WALD is my own platform for US equities: a data terminal and a trading system on one shared data layer, with its always-on services running 24/7 on Azure. The terminal turns market, filing, news and industry data into point-in-time datasets behind one read-only API and a terminal-style workspace, with industry-chain analysis at its core. The trading system uses an LLM as its analyst and code for forecasting, sizing, independent risk and execution.",
+        meta=[("Role", "Sole architect and developer: data pipelines, database, APIs, agents, both frontends, cloud operations"), ("Year", "2026"),
+              ("Stack", "Python · PostgreSQL · Parquet · vanilla JS · Azure · systemd · LLM APIs"), ("Status", "Running 24/7 on Azure since October 2026; private repository")],
+        frame="browser", frame_label="wald · data terminal → trading desk", video=f"{WD}/demo.mp4?v=3", poster=f"{WD}/poster.jpg?v=2",
+        video_label="97-second screen recording of the WALD data terminal and trading desk",
+        problem_h="What was known, when,<br><em>and who it reaches.</em>",
+        problem=["Trading on events means answering three questions fast: <b>what just happened, what was already known, and which companies it reaches</b>. The answers sit in a dozen sources with different clocks: exchange data, SEC filings, news wires, macro releases, foreign disclosures.",
+                 "Most of the errors are quiet. A restated quarter or a renamed ticker leaks <b>information from the future</b> into a backtest; a filing time recorded in the wrong time zone shifts a whole replay by hours.",
+                 "And the most valuable signal is often one step removed: a supplier's contract, a memory price, a capacity commitment. Seeing it needs <b>a supply chain mapped from primary evidence</b>, not a list of tickers."],
+        built_h="One data layer,<br><em>two products, always on.</em>",
+        blocks=[
+            dict(img=f"{WD}/cockpit.jpg", alt="Cockpit heat map of the AI supply chain", k="01 · INDUSTRY-CHAIN ANALYSIS", h="The AI supply chain, live",
+                 p="The terminal opens on a heat map of the AI supply chain, grouped by stage. Sector and theme heat maps and an infrastructure map from hyperscalers down to chips, packaging, power and cooling are one click away, and every company opens onto its own supply chain.",
+                 points=["Any company's suppliers and customers, five tiers up and down", "Peers, orders, partnerships and investments as separate relation types", "Every link marked as filed, registered or inferred"]),
+            dict(img=f"{WD}/hbm_dash.jpg", alt="HBM workbench dashboard", k="02 · ONE CHAIN IN DEPTH", h="Built from primary sources",
+                 p="The HBM workbench follows the memory chain end to end: supply, demand, pricing, capacity, qualification and product roadmaps per supplier. Relationships come from filings, such as supply contracts disclosed to the Korean regulator, with their correction history kept.",
+                 points=["201 Korean supply-contract disclosures parsed, with 168 correction links", "Capacity commitments and product roadmaps tracked per company", "A research trail runs event → product → evidence → impact"]),
+            dict(img=f"{WD}/asof.jpg", alt="Company financials replayed as of a past date", k="03 · POINT-IN-TIME DATA", h="Every row knows when it became known",
+                 p="Raw files land in an append-only lake, become fixed-version products, then a PostgreSQL database where every row carries the time it became available. Any page, API call or script can be replayed as of a past date and sees only what was known then.",
+                 points=["Row-level security enforces the cutoff in the database, not in the page", "Restatements kept as versions; ticker, CIK and FIGI resolved by date", "Strict mode refuses a historical request it cannot honour instead of silently degrading"]),
+            dict(img=f"{WD}/desk.jpg", alt="Trading desk overview", k="04 · TRADING SYSTEM", h="The model analyses; code decides",
+                 p="An LLM reads the filings and news and writes a research file with scenario prices by horizon. Code turns that into candidates, a manager sizes them, an independent risk station can veto, and a trader places limit orders. Every station leaves a versioned, hashed receipt.",
+                 points=["Inputs unlock at the time they were received, and model inputs are scanned for leaks", "Daily model budget enforced across all runs, with circuit breakers", "Research memory: dated facts, live theses and expectation cards frozen before earnings"]),
+            dict(img=f"{WD}/cloud.svg", alt="Cloud deployment diagram", k="05 · CLOUD OPERATIONS", h="Always on, on Azure",
+                 p="The platform's always-on layer runs on an Azure VM: 24 systemd services ingest SEC filings every minute with their acceptance times, read news wires and regulator releases, record quotes and order-flow tapes, freeze and score shadow forecasts, and keep a headless broker gateway connected to a paper account on a private network, its API bound to loopback.",
+                 points=["Hash-locked deployer: verifies hashes, checks for zero open positions and orders, drains running jobs and writes a receipt", "Every deploy approved by an independent reviewer first; six in one day, including during market hours", "Watchdog checks every service every 10 minutes and alerts on change; daily briefing, backup and cold copy with restore checks", "Model spend reserved and settled per call under daily caps; ledger, logs and broker reconciled"]),
+        ],
+        stats=[("1,050", "data sources verified working, from 1,500 probed"), ("20,291", "US securities in the versioned security master"),
+               ("16.5M", "rows in the point-in-time database, across 189 tables"), ("577K", "news documents from 15 sources")],
+        stats_note="Data terminal, as of 26 October 2026.",
+        stats2=[("851K", "issuer-month fundamentals rows, 7,697 issuers, 2009 to 2026"), ("4,900", "US stocks × 12 factors in the multi-factor panel"),
+                ("3.8M", "daily price bars, raw and adjusted"), ("2.06M", "segment-revenue rows taken from filings")],
+        stats2_note="Depth of the data.",
+        stats3=[("24<small>/7</small>", "on Azure since 10 October 2026, 24 systemd services"), ("48,953", "SEC filing files ingested into the cloud lake"),
+                ("162", "synthetic scenarios and 157 unit tests on the decision chain"), ("3,215", "historical cases for calibration and replay")],
+        stats3_note="Trading system and cloud operations.",
+        lessons_h="Run like production,<br><em>from day one.</em>",
+        lessons=[("Builder and reviewer, separated", "Every work package is self-checked against the reviewer's likely attacks, then accepted by an independent AI reviewer before it is committed."),
+                 ("Known when, not just known", "Every row carries when it became available and how that time was established. The database enforces the cutoff, so a replay cannot see the future."),
+                 ("Every link needs a source", "A supply-chain relation is filed, registered or inferred, and says so. Inferred links never pass as disclosed ones."),
+                 ("The model analyses; code decides", "The LLM writes research and scenarios. Sizing, risk limits, stops and orders are code, and the risk station ignores the model's opinion."),
+                 ("Deploys are approved and reversible", "No file reaches the cloud without a recorded approval, a hash check before and after, and a receipt."),
+                 ("Fail safe, not silent", "When a budget runs out, new paid work stops but risk checks, protective orders and checkpoints keep running.")],
+        limits=["Orders go to a paper account; live accounts are never connected.",
+                "Some industry dashboards appear in their labelled sample mode, and the interface is in Chinese."],
+    ),
+    dict(
+        slug="multifactor-scoring", eyebrow="Case study · 03 · Equity research tooling",
         title_plain="Multi-factor stock scoring", title_html="Multi-factor<br><em>stock scoring</em>",
         summary="A full-stack tool for equity research teams: researchers set the factors, directions and weights, and the tool turns them into exact, reproducible scores, rankings and an auditable stock pool, explaining every result factor by factor.",
         meta=[("Role", "Sole developer: design, backend, frontend, tests"), ("Year", "2026"), ("Stack", "Python · FastAPI · NumPy · SQLite · vanilla JS"), ("Status", "Runs on ~2,300 US equities on my own platform; private repository, source on request")],
-        frame="browser", frame_label="multi-factor-scoring · live walkthrough", video=f"{MF}/demo.mp4?v=2", poster=f"{MF}/poster.jpg?v=2",
+        frame="browser", frame_label="multi-factor-scoring · live walkthrough", video=f"{MF}/demo.mp4?v=3", poster=f"{MF}/poster.jpg?v=2",
         video_label="37-second screen recording of the multi-factor scoring tool on synthetic data",
         problem_h="Pools built by hand,<br><em>hard to explain.</em>",
         problem=["Research teams often build their candidate pools in spreadsheets: standardise a handful of factors, weight them, sort, take the top N. It works until someone asks <b>why a stock is in the pool</b>, or what changed since last week.",
@@ -213,11 +263,11 @@ CASES = [
                 "The recording uses synthetic data (200 sample companies across 10 industries). The same tool runs unchanged on ~2,300 US equities and 12 fundamental and momentum factors on my own platform; those data and results are not shown here."],
     ),
     dict(
-        slug="yrd-assistant", eyebrow="Case study · 03 · Workflow automation",
+        slug="yrd-assistant", eyebrow="Case study · 04 · Workflow automation",
         title_plain="YRD Assistant", title_html="YRD <em>Assistant</em>",
         summary="A desktop assistant that runs a financial publisher's daily report workflow: it finds the morning market commentary in Outlook, writes each section into the right WordPress draft, and drafts the confirmation email, while a person stays in charge of publishing.",
         meta=[("Role", "Sole developer, built for an employer"), ("Timeline", "March to May 2026"), ("Stack", "Node.js · Electron · Python · Outlook COM · WordPress REST API"), ("Status", "Delivered; private repository")],
-        frame="win", frame_label="YRD Assistant · desktop app", video=f"{YRD}/demo.mp4?v=2", poster=f"{YRD}/poster.jpg?v=2",
+        frame="win", frame_label="YRD Assistant · desktop app", video=f"{YRD}/demo.mp4?v=3", poster=f"{YRD}/poster.jpg?v=2",
         video_label="46-second screen recording of YRD Assistant running on synthetic content",
         problem_h="A daily copy-paste job<br><em>that had to be perfect.</em>",
         problem=["Every business day the publisher releases a bonds report and an equities report. The market commentary arrives by email in the morning, and someone has to copy <b>four sections into two WordPress drafts</b>, each under exactly the right heading, without disturbing the charts, tables and ads around them.",
